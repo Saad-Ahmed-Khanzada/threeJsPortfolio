@@ -12,7 +12,7 @@ export default function Wizard(props) {
   const modelRef = useRef();
 
   useFrame((state, delta, xrFrame) => {
-    console.log("STATE",state.clock);
+    // console.log("STATE",state.clock);
     
     modelRef.current.position.y =-1.5 + Math.sin(state.clock.elapsedTime) * 0.15; 
   });

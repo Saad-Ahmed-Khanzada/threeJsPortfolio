@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import ResponseComponent from "../ResponseComponent";
+import clsx from "clsx";
+import { motion } from "framer-motion";
 
 const getIcon = (icon) => {
   switch (icon) {
@@ -35,13 +38,25 @@ const getIcon = (icon) => {
   }
 };
 
-const NavButton = ({ x, y, label, link, icon, newTab }) => {
+const item={
+  hidden:{scale:0},
+  show:{scale:1}
+}
+
+const NavLink= motion(Link)
+
+const NavButton = ({ x, y, label, link, icon, newTab,labelDirection="right" }) => {
   return (
-    <div
+   <ResponseComponent>
+
+    {({size})=>{
+      return size && size > 480 ?
+<div
       className="absolute cursor-pointer z-50"
       style={{ transform: `translate(${x},${y})` }}
     >
-      <Link
+      <NavLink
+      variants={item}
         href={link}
         target={newTab ? "_blank" : "_self"}
         className="text-foreground  rounded-full flex items-center justify-center bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm"
@@ -55,8 +70,37 @@ const NavButton = ({ x, y, label, link, icon, newTab }) => {
             {label}
           </span>
         </span>
-      </Link>
+      </NavLink>
     </div>
+      :
+
+      <div
+      className="w-fit cursor-pointer z-50"
+      // style={{ transform: `translate(${x},${y})` }}
+    >
+      <NavLink
+      variants={item}
+        href={link}
+        target={newTab ? "_blank" : "_self"}
+        className="text-foreground  rounded-full flex items-center justify-center bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm"
+        aria-label={label}
+        name={label}
+      >
+        <span className="relative w-10 h-10 p-2.5  xs:w-14 xs:h-14 xs:p-4  hover:text-accent ">
+          {getIcon(icon)}
+          <span className="peer bg-transparent absolute top-0 left-0 w-full h-full" />
+          <span className={clsx("absolute hidden peer-hover:block px-2 py-1 left-full mx-2 top-1/2 -translate-y-1/2 custom-bg",labelDirection==="left" ? "right-full left-auto" :"")}>
+            {label}
+          </span>
+        </span>
+      </NavLink>
+    </div>
+    }}
+
+
+
+
+   </ResponseComponent>
   );
 };
 
