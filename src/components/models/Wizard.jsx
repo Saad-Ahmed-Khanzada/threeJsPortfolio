@@ -6,15 +6,15 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
-export default function Wizard(props) {
+const Wizard = React.memo(function Wizard(props) {
+  // Use React.memo for performance optimization
   const { nodes, materials } = useGLTF("/models/wizard-transformed.glb");
 
   const modelRef = useRef();
 
-  useFrame((state, delta, xrFrame) => {
-    // console.log("STATE",state.clock);
-    
-    modelRef.current.position.y =-1.5 + Math.sin(state.clock.elapsedTime) * 0.15; 
+  useFrame((state) => {
+    modelRef.current.position.y =
+      -1.5 + Math.sin(state.clock.elapsedTime) * 0.15;
   });
 
   return (
@@ -27,7 +27,7 @@ export default function Wizard(props) {
       rotation={[0.25, 0, 0]}
     >
       <mesh
-        castShado
+        castShadow
         receiveShadow
         geometry={nodes.Evil_Hathattty_mesh_Evil_HatBLN_Hat_0.geometry}
         material={materials.Evil_HatBLN_Hat}
@@ -208,6 +208,7 @@ export default function Wizard(props) {
       />
     </group>
   );
-}
+});
 
+export default Wizard;
 useGLTF.preload("/models/wizard-transformed.glb");

@@ -8,6 +8,8 @@ import ResponseComponent from "../ResponseComponent";
 import { motion } from "framer-motion";
 
 
+
+
 const container = {
   hidden:{opacity:0},
   show:{
@@ -91,7 +93,7 @@ const Navigation = () => {
           animate="show" className="w-full px-2.5 xs:p-0 xs:w-max flex flex-col space-y-4 items-end xs:items-center justify-center relative  group">
                 {BtnList.slice(BtnList.length / 2, BtnList.length).map(
                   (btn, index) => {
-                    0;
+                  
                     // console.log("VALUES", index, angleRad, radius, x, y);
 
                     return (
