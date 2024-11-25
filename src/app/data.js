@@ -41,7 +41,7 @@ export const projectsData = [
   },
   {
     id: 4,
-    name: "JazzWorld",
+    name: "Jazz World",
     description: "A progressive web application with pocketbase database connected for tracking user data built on Sveltekit",
     date: "2023-08-30",
     demoLink: "N/A",
