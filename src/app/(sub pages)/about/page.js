@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bg from "../../../../public/background/about-background3.png";
+import bg from "../../../../public/background/about-background4.webp";
 
 import RenderModel from "@/components/RenderModel";
 // import AboutModel from "@/components/models/AboutModel";

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bg from "../../../../public/background/projects-background4.png";
+import bg from "../../../../public/background/projects-background6.webp";
 import { projectsData } from "../../data";
 import ProjectList from "@/components/projects";
 import RenderModel from "@/components/RenderModel";
@@ -16,7 +16,7 @@ export default function Home() {
       <Image
         src={bg}
         alt="background-image"
-        className="-z-50 fixed top-0 left-0 w-full h-full object-cover object-center opacity-60"
+        className="-z-50 fixed top-0 left-0 w-full h-full object-cover object-center opacity-20"
         priority
         sizes="100vw"
       />

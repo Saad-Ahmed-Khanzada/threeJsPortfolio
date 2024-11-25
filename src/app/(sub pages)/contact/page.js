@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bg from "../../../../public/background/contact-background.png";
+import bg from "../../../../public/background/contact-background2.webp";
 import Form from "@/components/contact/Form";
 
 export default function Contact() {
@@ -9,7 +9,7 @@ export default function Contact() {
         src={bg}
         alt="background-image"
         priority sizes="100vw"
-        className="-z-50 fixed top-0 left-0 w-full h-full object-cover object-center opacity-25"
+        className="-z-50 fixed top-0 left-0 w-full h-full object-cover object-center opacity-20"
       />
 
      <article className="relative w-full flex flex-col items-center
