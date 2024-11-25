@@ -57,7 +57,7 @@ const AboutDetails = () => {
 
         
         <ItemLayout className={"col-span-full md:col-span-8 !p-0"}>
-            <img className="w-full h-auto" src="  https://github-readme-stats.vercel.app/api/pin/?username=Saad-Ahmed-Khanzada&repo=sugarBalance&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false&description_lines_count=2" alt="saadAhmed" loading="lazy" />
+            <img className="w-full h-auto" src="  https://github-readme-stats.vercel.app/api/pin/?username=Saad-Ahmed-Khanzada&repo=KorraApp-ReactNative&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false&description_lines_count=2" alt="saadAhmed" loading="lazy" />
         </ItemLayout>
 
 
