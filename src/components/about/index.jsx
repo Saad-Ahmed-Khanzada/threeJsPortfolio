@@ -4,7 +4,7 @@ import ItemLayout from "./ItemLayout";
 
 const AboutDetails = () => {
   return (
-    <section className="py-0 w-full">
+    <section className="py-12 w-full">
       <div className="grid grid-cols-12 gap-4 xs:gap-6 md:gap-8 w-full">
         <ItemLayout className={"col-span-full lg:col-span-8 row-span-2 flex-col items-start"}>
           <h2 className="text-xl md:text-2xl text-left w-full capitalize">
@@ -48,7 +48,7 @@ const AboutDetails = () => {
         </ItemLayout>
        
        {/* ! with padding means important in tailwind */}
-        <ItemLayout className={"col-span-full md:col-span-8 !p-0"}>
+        <ItemLayout className={"col-span-full md:col-span-6 !p-0"}>
      <img className="w-full h-auto"  src="https://github-readme-streak-stats.herokuapp.com?user=Saad-Ahmed-Khanzada&theme=dark&hide_border=true&type=svg&currStreakLabel=FEFE58&background=EB545400&ring=FEFE58"  alt="github contributions" loading="lazy" />
         </ItemLayout>
         {/* <ItemLayout className={"col-span-full md:col-span-8 !p-0"}>
@@ -56,7 +56,7 @@ const AboutDetails = () => {
         </ItemLayout> */}
 
         
-        <ItemLayout className={"col-span-full md:col-span-8 !p-0"}>
+        <ItemLayout className={"col-span-full md:col-span-6 !p-0"}>
             <img className="w-full h-auto" src="  https://github-readme-stats.vercel.app/api/pin/?username=Saad-Ahmed-Khanzada&repo=KorraApp-ReactNative&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false&description_lines_count=2" alt="saadAhmed" loading="lazy" />
         </ItemLayout>
 
