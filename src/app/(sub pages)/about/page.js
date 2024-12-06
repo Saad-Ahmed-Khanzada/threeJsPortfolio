@@ -27,13 +27,13 @@ export default function About() {
         </RenderModel>
       </div>
 
-      <div className="relative w-full h-full flex flex-col items-center justify-center">
+      <div className="relative w-full p-0 lg:p-4 mt-8 h-full flex flex-col items-center justify-center">
         <div className="absolute flex  w-full flex-col items-center text-center top-[60%] sm:top-[-10%] left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <h1 className="font-bold pb text-2xl xs:text-2xl sm:text-4xl  lg:text-5xl  text-accent  ">
+          <h1 className="font-bold pb text-xl xs:text-2xl sm:text-4xl  lg:text-5xl  text-accent  bg-white bg-opacity-5 p-1 xs:p-2 sm:p-2 lg:p-4 rounded-full">
             Saad Ahmed Khanzada
           </h1>
-          <p className="font-light text-foreground text-lg">
-            A Passionate Computer Scientist
+          <p className="font-light text-foreground text-sm xs:text-sm sm:text-2xl  lg:text-3xl ">
+           Computer Scientist
           </p>
         </div>
       </div>
