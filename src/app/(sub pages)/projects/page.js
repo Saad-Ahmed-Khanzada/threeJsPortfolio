@@ -3,7 +3,6 @@ import bg from "../../../../public/background/projects-background6.webp";
 import { projectsData } from "../../data";
 import ProjectList from "@/components/projects";
 import RenderModel from "@/components/RenderModel";
-// import ProjectModel from "@/components/models/ProjectModel";
 import dynamic from "next/dynamic";
 
 const ProjectModel = dynamic(() => import("@/components/models/ProjectModel"), {
@@ -21,11 +20,16 @@ export default function Home() {
         sizes="100vw"
       />
 
-      <ProjectList projects={projectsData} />
-      <div className="flex items-center justify-center fixed top-16 lg:top-20 -translate-x-1/2 lg:translate-x-0 -z-10 left-1/2 lg:-left-24 h-screen">
+      {/* Background 3D Model */}
+      <div className="fixed inset-0 flex items-center justify-center -z-20 opacity-15">
         <RenderModel>
           <ProjectModel />
         </RenderModel>
+      </div>
+
+      {/* Projects List - Always in front */}
+      <div className="relative z-10">
+        <ProjectList projects={projectsData} />
       </div>
     </>
   );
