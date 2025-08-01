@@ -1,119 +1,107 @@
-import {
-  Github,
-  Home,
-  Linkedin,
-  NotebookText,
-  Palette,
-  Phone,
-  Twitter,
-  User,
-  Facebook,
-  Instagram
-} from "lucide-react";
-import Link from "next/link";
+"use client";
 import React from "react";
-import ResponseComponent from "../ResponseComponent";
+import Link from "next/link";
+import Image from "next/image";
+import { 
+  Home, User, FolderOpen, Mail, Github, Linkedin, 
+  Instagram, FileText, Layers3 
+} from "lucide-react";
 import { motion } from "framer-motion";
-import clsx from 'clsx';
-
 
 const getIcon = (icon) => {
-  switch (icon) {
-    case "home":
-      return <Home className="w-full h-auto" strokeWidth={1.5} />;
-    case "about":
-      return <User className="w-full h-auto" strokeWidth={1.5} />;
-    case "projects":
-      return <Palette className="w-full h-auto" strokeWidth={1.5} />;
-    case "contact":
-      return <Phone className="w-full h-auto" strokeWidth={1.5} />;
-    case "github":
-      return <Github className="w-full h-auto" strokeWidth={1.5} />;
-    case "linkedin":
-      return <Linkedin className="w-full h-auto" strokeWidth={1.5} />;
-    case "instagram":
-      return <Instagram className="w-full h-auto" strokeWidth={1.5} />;
-    case "resume":
-      return <NotebookText className="w-full h-auto" strokeWidth={1.5} />;
-
-    default:
-      return <Home className="w-full h-auto" strokeWidth={1.5} />;
+  const iconMap = {
+    home: Home,
+    about: "profile", // Special case for profile photo
+    projects: FolderOpen,
+    contact: Mail,
+    github: Github,
+    linkedin: Linkedin,
+    instagram: Instagram,
+    resume: FileText,
+    stack: Layers3,
+  };
+  
+  const IconComponent = iconMap[icon];
+  
+  // Handle profile photo for about section
+  if (icon === "about") {
+    return (
+      <div className="w-full h-full rounded-full overflow-hidden border-2 border-accent/30 group-hover:border-accent transition-colors duration-300">
+        <Image
+              src="/edited-picaai.png"  // Add your photo here
+          alt="Saad Ahmed Khanzada"
+          width={48}
+          height={48}
+          className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+        />
+      </div>
+    );
   }
+  
+  return <IconComponent className="w-full h-auto" strokeWidth={1.5} />;
 };
 
 const item = {
   hidden: { scale: 0 },
-  show: { scale: 1 },
+  show: { scale: 1 }
 };
 
 const NavLink = motion(Link);
 
-const NavButton = ({
-  x,
-  y,
-  label,
-  link,
-  icon,
-  newTab,
-  labelDirection = "right",
-}) => {
+const NavButton = ({ x, y, label, link, icon, newTab, labelDirection = "right" }) => {
   return (
-    <ResponseComponent>
-      {({ size }) => {
-        return size && size > 480 ? (
-          <div
-            className="absolute cursor-pointer z-50"
-            style={{ transform: `translate(${x},${y})` }}
-          >
-            <NavLink
-              variants={item}
-              href={link}
-              target={newTab ? "_blank" : "_self"}
-              className="text-foreground  rounded-full flex items-center justify-center bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm"
-              aria-label={label}
-              name={label}
-            >
-              <span className="relative  w-14 h-14 p-4 animate-spin-slow-reverse hover:text-accent group-hover:pause">
-                {getIcon(icon)}
-                <span className="peer bg-transparent absolute top-0 left-0 w-full h-full" />
-                <span className="absolute hidden peer-hover:block px-2 py-1 left-full mx-2 top-1/2 -translate-y-1/2 custom-bg">
-                  {label}
-                </span>
-              </span>
-            </NavLink>
-          </div>
+    <div
+      className="absolute cursor-pointer z-50 group"
+      style={{ transform: `translate(${x}, ${y})` }}
+    >
+      <NavLink
+        variants={item}
+        href={link}
+        target={newTab ? "_blank" : "_self"}
+        className={`
+          text-foreground rounded-full flex items-center justify-center custom-bg
+          hover:text-accent relative group-hover:scale-110 transition-all duration-300
+          group-hover:pause animate-spin-slow-reverse
+          ${icon === "about" 
+            ? "w-12 h-12 md:w-14 md:h-14 p-0" 
+            : "w-12 h-12 md:w-14 md:h-14 p-2.5 md:p-3"
+          }
+        `}
+        aria-label={label}
+        rel={newTab ? "noopener noreferrer" : undefined}
+      >
+        {icon === "about" ? (
+          getIcon(icon)
         ) : (
-          <div
-            className="w-fit cursor-pointer z-50"
-            // style={{ transform: `translate(${x},${y})` }}
-          >
-            <NavLink
-              variants={item}
-              href={link}
-              target={newTab ? "_blank" : "_self"}
-              className="text-foreground  rounded-full flex items-center justify-center bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm"
-              aria-label={label}
-              name={label}
-            >
-              <span className="relative w-10 h-10 p-2.5  xs:w-14 xs:h-14 xs:p-4  hover:text-accent ">
-                {getIcon(icon)}
-                <span className="peer bg-transparent absolute top-0 left-0 w-full h-full" />
-                <span
-  className={clsx(
-    "absolute hidden  peer-hover:block px-2 py-1 mx-2 top-1/2 -translate-y-1/2 custom-bg",
-    labelDirection === "left" ? "right-full" : " left-full"
-  )}
->
-  {label}
-</span>
+          <span className="w-6 h-6 md:w-7 md:h-7 relative">
+            {getIcon(icon)}
+          </span>
+        )}
 
-
-              </span>
-            </NavLink>
-          </div>
-        );
-      }}
-    </ResponseComponent>
+        {/* Enhanced Hover Label */}
+        <span 
+          className={`
+            absolute px-3 py-2 custom-bg text-foreground text-sm font-medium rounded-lg
+            opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none
+            transform scale-95 group-hover:scale-100 z-60 whitespace-nowrap
+            ${labelDirection === "left" 
+              ? "right-full mr-3 top-1/2 -translate-y-1/2" 
+              : "left-full ml-3 top-1/2 -translate-y-1/2"
+            }
+            border border-accent/20 shadow-lg backdrop-blur-sm
+            before:content-[''] before:absolute before:w-2 before:h-2 before:custom-bg
+            before:border-l before:border-b before:border-accent/20 before:rotate-45
+            before:top-1/2 before:-translate-y-1/2
+            ${labelDirection === "left" 
+              ? "before:-right-1" 
+              : "before:-left-1"
+            }
+          `}
+        >
+          {label}
+        </span>
+      </NavLink>
+    </div>
   );
 };
 

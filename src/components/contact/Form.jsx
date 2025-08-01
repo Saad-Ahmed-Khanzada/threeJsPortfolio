@@ -26,44 +26,29 @@ export default function Form() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
-  const sendEmail = (params) => {
-    const toastId = toast.loading("Sending your message, please wait...");
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_SERVICE_ID,
-        process.env.NEXT_PUBLIC_TEMPLATE_ID,
-        params,
-        {
-          publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY,
-
-          limitRate: {
-            throttle: 5000, //you cannot send more than 1 email /5 seconds
-          },
-        }
-      )
-      .then(
-        () => {
-          toast.success(
-            "I have received your message, I will get back to you soon!",
-            {
-              id: toastId,
-            }
-          );
-          console.log("SUCCESS!");
-        },
-        (error) => {
-          toast.error(
-            "There was an error sending your message please try later again",
-            {
-              id: toastId,
-            }
-          );
-          console.log("FAILED...", error.text);
-        }
-      );
-  };
-
+const sendEmail = (params) => {
+  const toastId = toast.loading("Sending your message, please wait...");
+  
+  emailjs.send(
+    process.env.NEXT_PUBLIC_SERVICE_ID,
+    process.env.NEXT_PUBLIC_TEMPLATE_ID,
+    params,
+    {
+      publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY,
+      limitRate: { throttle: 5000 },
+    }
+  )
+  .then(() => {
+    toast.success("I have received your message, I will get back to you soon!", { id: toastId });
+    reset(); // ADD THIS - reset form after successful submission
+  })
+  .catch((error) => {
+    console.error("Email send failed:", error);
+    toast.error("There was an error sending your message. Please try again later.", { id: toastId });
+  });
+};
   const onSubmit = (data) => {
     const templateParams = {
       to_name: "Saad Ahmed Khanzada",

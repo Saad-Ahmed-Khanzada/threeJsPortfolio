@@ -2,33 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
+@layer base {
   :root {
     --background: 27 27 27;
     --foreground: 225 225 225;
     --muted: 115 115 115;
-    --accent: 254 254 91;
-    /* FEFE5B */
+    --accent: 254 254 91; /* FEFE5B */
   }
 }
-@layer utilities{
-  .pause{
+
+@layer utilities {
+  .pause {
     animation-play-state: paused;
   }
-  .custom-bg{
+  
+  .custom-bg {
     @apply bg-background/20 border border-accent/30 border-solid backdrop-blur-[6px] shadow-glass-inset hover:shadow-glass-sm;
   }
+
+  /* Line clamp utilities for text truncation */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Background gradient for fireflies */
+  .bg-firefly-radial {
+    background: radial-gradient(circle, rgb(254, 254, 91) 0%, transparent 70%);
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(254, 254, 91, 0.1);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(254, 254, 91, 0.3);
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(254, 254, 91, 0.5);
+  }
 }
 
-@keyframes move{
-  0%{
-    transform: translate(0,0);
+@keyframes move {
+  0% {
+    transform: translate(0, 0);
   }
-  100%{
-    transform: translate(100px,100px);
+  100% {
+    transform: translate(100px, 100px);
+  }
+}
 
+/* Add smooth transitions for better UX */
+@layer components {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
+  .hover-lift {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
 }
-
-
