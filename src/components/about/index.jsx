@@ -35,7 +35,7 @@ const AboutDetails = () => {
         {/* Experience Stats */}
         <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-4 text-center"}>
           <p className="font-semibold w-full text-2xl sm:text-3xl lg:text-4xl text-accent">
-            4+ <sub className="font-semibold text-base">years of experience</sub>
+            3+ <sub className="font-semibold text-base">years of experience</sub>
           </p>
         </ItemLayout>
 
