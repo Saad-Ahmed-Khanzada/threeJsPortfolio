@@ -168,7 +168,7 @@ export default function ProjectDetail({ params }) {
           {/* Contact CTA */}
           <div className="custom-bg p-6 md:p-8 rounded-xl text-center">
             <h3 className="text-xl font-semibold text-foreground mb-3">Interested in this project?</h3>
-            <p className="text-muted mb-4">Let's discuss how I can help you build something similar</p>
+            <p className="text-muted mb-4">Let&apos;s discuss how I can help you build something similar</p>
             <Link 
               href="/contact"
               className="inline-flex items-center px-6 py-3 bg-accent text-background font-medium rounded-lg hover:bg-accent/90 transition-colors"
