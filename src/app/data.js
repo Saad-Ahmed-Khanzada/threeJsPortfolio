@@ -290,7 +290,6 @@ export const projectsData = [
     ]
   }
 ];
-
 export const techStackData = [
   {
     name: "React",
@@ -298,6 +297,13 @@ export const techStackData = [
     description: "A JavaScript library for building user interfaces",
     icon: "react",
     color: "#61DAFB"
+  },
+  {
+    name: "Next.js",
+    category: "Frontend Framework",
+    description: "The React framework for production applications",
+    icon: "nextjs",
+    color: "#000000"
   },
   {
     name: "React Native",

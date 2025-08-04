@@ -3,6 +3,7 @@ import "./globals.css";
 import clsx from "clsx";
 import FireFliesBg from "@/components/FireFliesBg";
 import Sound from "@/components/Sound";
+import { NavigationProvider } from "@/contexts/NavigationContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={clsx(inter.variable, "bg-background text-foreground font-inter")}>
-        {children}
-        <FireFliesBg/>
-        <Sound/>
+        <NavigationProvider>
+          {children}
+          <FireFliesBg/>
+          <Sound/>
+        </NavigationProvider>
 
         <div id="my-modal"/>
       </body>

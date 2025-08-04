@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bg from "../../public/background/home-background7.webp";
+import bg from "../../public/background/home-background9.png";
 import RenderModel from "@/components/RenderModel";
 import Navigation from "@/components/navigation";
 import ProfilePhoto from "@/components/ProfilePhoto";
@@ -22,28 +22,14 @@ export default function Home() {
       />
     
       <div className="w-full h-screen">
-        {/* Navigation */}
         <Navigation/>
         
-        {/* Choose between 3D Wizard OR Profile Photo */}
-        
-        {/* Option 1: Keep 3D Wizard (current) */}
+
         <RenderModel>
           <Wizard/>
         </RenderModel>
         
-        {/* Option 2: Replace with Profile Photo (uncomment to use) */}
-        {/* <ProfilePhoto /> */}
-        
-        {/* Option 3: Both - Photo in center, Wizard smaller in corner (uncomment to use) */}
-        
-        {/* <ProfilePhoto /> */}
-        {/* <div className="absolute bottom-10 right-10 w-32 h-32 opacity-60">
-          <RenderModel>
-            <Wizard/>
-          </RenderModel>
-        </div> */}
-       
+
       </div>
     </main>
   );

@@ -27,7 +27,7 @@ const AboutDetails = () => {
           
           {/* Name & Title under photo */}
           <div className="mt-4 text-center">
-            <h3 className="text-lg font-semibold text-accent">Saad Ahmed Khanzada</h3>
+            <h3 className="text-lg font-semibold text-accent">Saad Ahmed</h3>
             <p className="text-sm text-muted">Frontend Developer</p>
           </div>
         </ItemLayout>
@@ -103,7 +103,7 @@ const AboutDetails = () => {
         <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-4 !p-0"}>
           <img 
             className="w-full h-auto" 
-            src="https://github-readme-stats.vercel.app/api/top-langs/?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false" 
+            src="https://github-readme-stats.vercel.app/api/top-langs/?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false" 
             alt="Saad Ahmed Top Languages" 
             loading="lazy" 
           />
@@ -113,7 +113,7 @@ const AboutDetails = () => {
         <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-8 !p-0"}>
           <img 
             className="w-full h-auto" 
-            src="https://github-readme-stats.vercel.app/api?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false" 
+            src="https://github-readme-stats.vercel.app/api?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false" 
             alt="Saad Ahmed GitHub Stats" 
             loading="lazy" 
           />
@@ -133,7 +133,7 @@ const AboutDetails = () => {
         <ItemLayout className={"col-span-full md:col-span-6 !p-0"}>
           <img 
             className="w-full h-auto"  
-            src="https://github-readme-streak-stats.herokuapp.com?user=Saad-Ahmed-Khanzada&theme=dark&hide_border=true&type=svg&currStreakLabel=FEFE58&background=EB545400&ring=FEFE58"  
+            src="https://github-readme-streak-stats.herokuapp.com?user=Saad-Ahmed-Khanzada&theme=dark&hide_border=true&type=svg&currStreakLabel=22D3EE&background=EB545400&ring=22D3EE"  
             alt="GitHub Contribution Streak" 
             loading="lazy" 
           />
@@ -143,7 +143,7 @@ const AboutDetails = () => {
         <ItemLayout className={"col-span-full md:col-span-6 !p-0"}>
           <img 
             className="w-full h-auto" 
-            src="https://github-readme-stats.vercel.app/api/pin/?username=Saad-Ahmed-Khanzada&repo=KorraApp-ReactNative&theme=transparent&hide_border=true&title_color=FEFE5B&text_color=FFFFFF&icon_color=FEFE5B&text_bold=false&description_lines_count=2" 
+            src="https://github-readme-stats.vercel.app/api/pin/?username=Saad-Ahmed-Khanzada&repo=KorraApp-ReactNative&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false&description_lines_count=2" 
             alt="Featured Project - Korra AI" 
             loading="lazy" 
           />

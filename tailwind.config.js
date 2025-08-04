@@ -19,25 +19,34 @@ module.exports = {
         accent:`rgb(var(--accent))`,
       },
       backgroundImage:{
-        'firefly-radial': "radial-gradient(50% 50% at 50% 50%, rgba(168, 85, 247, 0.5) 0%, rgba(217,217,217, 0) 100%)"
+        'firefly-radial': "radial-gradient(50% 50% at 50% 50%, rgba(34, 211, 238, 0.5) 0%, rgba(217,217,217, 0) 100%)"
       },
       boxShadow: {
-        'glass-inset': 'inset 0 17px 5px -9px rgba(168, 85, 247, 0.08)',
-        'glass-sm': '5px 5px 20px 0px rgba(168, 85, 247, 0.4)',
-        'purple-glow': '0 0 25px rgba(168, 85, 247, 0.4)',
-        'purple-glow-strong': '0 0 35px rgba(168, 85, 247, 0.6)',
+        'glass-inset': 'inset 0 17px 5px -9px rgba(34, 211, 238, 0.08)',
+        'glass-sm': '5px 5px 20px 0px rgba(34, 211, 238, 0.4)',
+        'cyan-glow': '0 0 25px rgba(34, 211, 238, 0.4)',
+        'cyan-glow-strong': '0 0 35px rgba(34, 211, 238, 0.6)',
+        'cyan-pulse': '0 0 20px rgba(34, 211, 238, 0.3)',
       },      
       keyframes:{
         'spin-reverse':{
           '0%':{transform: 'rotate(0deg)'},
           '100%':{transform: 'rotate(-360deg)'},
         },
-        'purple-pulse': {
+        'cyan-pulse': {
           '0%, 100%': {
-            boxShadow: '0 0 20px rgba(168, 85, 247, 0.4)'
+            boxShadow: '0 0 20px rgba(34, 211, 238, 0.4)'
           },
           '50%': {
-            boxShadow: '0 0 30px rgba(168, 85, 247, 0.6)'
+            boxShadow: '0 0 30px rgba(34, 211, 238, 0.6)'
+          }
+        },
+        'cyan-wave': {
+          '0%': {
+            transform: 'translateX(-100%)'
+          },
+          '100%': {
+            transform: 'translateX(100%)'
           }
         },
         'float': {
@@ -52,7 +61,8 @@ module.exports = {
       animation:{
         'spin-slow':'spin 40s linear infinite',
         'spin-slow-reverse':'spin-reverse 40s linear infinite',
-        'purple-pulse': 'purple-pulse 2s ease-in-out infinite',
+        'cyan-pulse': 'cyan-pulse 2s ease-in-out infinite',
+        'cyan-wave': 'cyan-wave 3s ease-in-out infinite',
         'float': 'float 3s ease-in-out infinite'
       },
       screens:{
