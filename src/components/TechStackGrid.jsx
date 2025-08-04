@@ -177,7 +177,7 @@ const TechStackGrid = ({ techStack }) => {
           </div>
           
           <div className="custom-bg p-4 rounded-xl">
-            <div className="text-3xl font-bold text-accent">4+</div>
+            <div className="text-3xl font-bold text-accent">3+</div>
             <div className="text-sm text-muted">Years Exp.</div>
           </div>
           
