@@ -1,169 +1,252 @@
+"use client";
+
 import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, Mail, MapPin, Github, Linkedin } from "lucide-react";
 import ItemLayout from "./ItemLayout";
+import SectionHeading from "@/components/ui/SectionHeading";
+import Reveal from "@/components/ui/Reveal";
+import {
+  personalData,
+  aboutParagraphs,
+  coreCompetencies,
+  servicesData,
+} from "@/app/data";
 
 const AboutDetails = () => {
   return (
-    <section className="py-12 w-full">
-      <div className="grid grid-cols-12 gap-4 xs:gap-6 md:gap-8 w-full">
-        {/* Profile Photo Section */}
-        <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-4 flex-col items-center justify-center"}>
-          <div className="relative group">
-            {/* Glow Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-accent/20 via-accent/30 to-accent/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            
-            {/* Photo Container */}
-            <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-accent/40 group-hover:border-accent/70 transition-all duration-300">
-            <img
-                src="/edited-picaai2.png" 
-                alt="Saad Ahmed Khanzada"
-                className="w-full object-cover object-center group-hover:scale-110 transition-all duration-500 
-                  group-hover:h-48 sm:group-hover:h-56 md:group-hover:h-64 lg:group-hover:h-72 xl:group-hover:h-80"
+    <div className="section-stack w-full">
+      {/* ---------------- Profile + narrative ---------------- */}
+      <section>
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-12">
+          {/* Photo + identity card */}
+          <ItemLayout className="col-span-full flex-col items-center justify-start text-center lg:col-span-4">
+            <div className="group relative">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-accent/20 via-accent/30 to-accent/20 blur-xl transition-all duration-500 group-hover:blur-2xl"
               />
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative h-32 w-32 overflow-hidden rounded-full border-4 border-accent/40 transition-colors duration-300 group-hover:border-accent/70 sm:h-40 sm:w-40 md:h-44 md:w-44">
+                <Image
+                  src="/edited-picaai2.png"
+                  alt={`${personalData.name}, ${personalData.title}`}
+                  width={176}
+                  height={176}
+                  className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
             </div>
-          </div>
-          
-          {/* Name & Title under photo */}
-          <div className="mt-4 text-center">
-            <h3 className="text-lg font-semibold text-accent">Saad Ahmed</h3>
-            <p className="text-sm text-muted">Frontend Developer</p>
-          </div>
-        </ItemLayout>
 
-        {/* Experience Stats */}
-        <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-4 text-center"}>
-          <p className="font-semibold w-full text-2xl sm:text-3xl lg:text-4xl text-accent">
-            3+ <sub className="font-semibold text-base">years of experience</sub>
-          </p>
-        </ItemLayout>
+            <div className="mt-5">
+              <h3 className="font-display text-lg font-bold text-foreground">
+                {personalData.name}
+              </h3>
+              <p className="mt-1 text-sm font-semibold text-accent">
+                {personalData.title}
+              </p>
+              <p className="mt-0.5 text-xs text-muted">
+                {personalData.secondaryTitles.join(" · ")}
+              </p>
+            </div>
 
-        {/* Projects Count */}
-        <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-4 text-center"}>
-          <p className="font-semibold w-full text-2xl sm:text-3xl lg:text-4xl text-accent">
-            16+ <sub className="font-semibold text-base">completed projects</sub> 
-          </p>
-        </ItemLayout>
+            {/* py-1.5 keeps each row above the 24px minimum tap target —
+                these were 16px tall and awkward to hit on a phone. */}
+            <ul className="mt-5 flex w-full flex-col gap-1 border-t border-accent/15 pt-4 text-left">
+              <li className="flex items-center gap-2 py-1.5 text-xs text-foreground/75">
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
+                {personalData.location}
+              </li>
+              <li>
+                <a
+                  href={`mailto:${personalData.email}`}
+                  className="flex items-center gap-2 break-all rounded py-1.5 text-xs text-foreground/75 transition-colors hover:text-accent"
+                >
+                  <Mail className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
+                  {personalData.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={personalData.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded py-1.5 text-xs text-foreground/75 transition-colors hover:text-accent"
+                >
+                  <Linkedin className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href={personalData.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded py-1.5 text-xs text-foreground/75 transition-colors hover:text-accent"
+                >
+                  <Github className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
+                  GitHub
+                </a>
+              </li>
+            </ul>
+          </ItemLayout>
 
-        {/* Main Bio Section */}
-        <ItemLayout className={"col-span-full flex-col items-start"}>
-          <h2 className="text-xl md:text-2xl text-left w-full capitalize mb-4">
-            About Me
-          </h2>
-          
-          {/* Professional Tags */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            <span className="px-3 py-1 bg-accent/10 text-accent border border-accent/20 rounded-full text-xs font-medium">
-              React & Next.js Expert
-            </span>
-            <span className="px-3 py-1 bg-accent/10 text-accent border border-accent/20 rounded-full text-xs font-medium">
-              Mobile App Developer
-            </span>
-            <span className="px-3 py-1 bg-accent/10 text-accent border border-accent/20 rounded-full text-xs font-medium">
-              TypeScript Specialist
-            </span>
-            <span className="px-3 py-1 bg-accent/10 text-accent border border-accent/20 rounded-full text-xs font-medium">
-              PWA & Responsive Design
-            </span>
-            <span className="px-3 py-1 bg-accent/10 text-accent border border-accent/20 rounded-full text-xs font-medium">
-              N8N Automation Architect
-            </span>
-          </div>
+          {/* Narrative */}
+          <ItemLayout className="col-span-full flex-col items-start lg:col-span-8">
+            <span className="eyebrow">About me</span>
+            <h2 className="mt-2 font-display text-xl font-bold leading-tight text-foreground sm:text-2xl">
+              I stopped being a frontend developer a while ago
+            </h2>
+            <div aria-hidden="true" className="hairline mt-3 h-px w-24" />
 
-          <p className="font-light text-xs sm:text-sm md:text-base leading-relaxed">
-            Passionate Computer Science graduate with 3+ years of specialized experience in <strong className="text-accent">Frontend Development</strong> 
-            and intelligent automation solutions. I excel at creating user-centric applications using modern JavaScript frameworks including 
-            <strong className="text-accent"> React, React Native, Next.js, and SvelteKit</strong>, delivering seamless cross-platform experiences 
-            that prioritize performance and user experience.
-          </p>
-          
-          <p className="font-light text-xs sm:text-sm md:text-base leading-relaxed mt-4">
-            My frontend expertise encompasses the entire modern web development ecosystem: <strong className="text-accent">TypeScript</strong> for 
-            type-safe development, <strong className="text-accent">Tailwind CSS</strong> for responsive design, <strong className="text-accent">Redux 
-            & Redux Toolkit</strong> for state management, and <strong className="text-accent">Expo</strong> for rapid mobile app development. 
-            I specialize in building Progressive Web Applications (PWAs) and mobile-first designs that work flawlessly across all devices.
-          </p>
+            <div className="mt-5 flex flex-col gap-4">
+              {aboutParagraphs.map((paragraph) => (
+                <p
+                  key={paragraph.slice(0, 40)}
+                  className="text-sm leading-relaxed text-foreground/80 sm:text-[0.95rem]"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
 
-          <p className="font-light text-xs sm:text-sm md:text-base leading-relaxed mt-4">
-            As an <strong className="text-accent">N8N Agent Architect</strong>, I bridge the gap between frontend applications and backend automation, 
-            creating intelligent workflow systems that enhance user experiences. My automation solutions include AI-powered customer service bots, 
-            voice-activated systems using <strong className="text-accent">Twilio integration</strong>, and seamless API integrations that connect 
-            frontend interfaces with powerful backend services.
-          </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/experience" className="btn-primary">
+                See my experience
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link href="/projects" className="btn-secondary">
+                Browse projects
+              </Link>
+            </div>
+          </ItemLayout>
+        </div>
+      </section>
 
-          <p className="font-light text-xs sm:text-sm md:text-base leading-relaxed mt-4">
-            I am committed to writing clean, maintainable code and following modern development practices including <strong className="text-accent">
-            component-based architecture, responsive design patterns, and performance optimization</strong>. My approach combines technical excellence 
-            in frontend development with strategic automation thinking to deliver scalable solutions that grow with business needs.
-          </p>
-        </ItemLayout>
-        
-        {/* GitHub Top Languages */}
-        <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-4 !p-0"}>
-          <img 
-            className="w-full h-auto" 
-            src="https://github-readme-stats.vercel.app/api/top-langs/?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false" 
-            alt="Saad Ahmed Top Languages" 
-            loading="lazy" 
-          />
-        </ItemLayout>
+      {/* ---------------- Core competencies ---------------- */}
+      <section>
+        <SectionHeading
+          eyebrow="Core competencies"
+          title="What I bring to a team"
+          intro="Grouped by the four kinds of work I actually do day to day, rather than as one undifferentiated keyword list."
+        />
 
-        {/* GitHub Stats */}
-        <ItemLayout className={"col-span-full sm:col-span-6 lg:col-span-8 !p-0"}>
-          <img 
-            className="w-full h-auto" 
-            src="https://github-readme-stats.vercel.app/api?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false" 
-            alt="Saad Ahmed GitHub Stats" 
-            loading="lazy" 
-          />
-        </ItemLayout>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {coreCompetencies.map((group, index) => (
+            <Reveal
+              key={group.group}
+              delay={index * 0.06}
+              className="custom-bg-raised hover-lift flex h-full flex-col rounded-xl p-5"
+            >
+              <h3 className="font-display text-sm font-bold text-accent sm:text-base">
+                {group.group}
+              </h3>
+              <div aria-hidden="true" className="hairline mt-3 h-px w-full" />
+              <ul className="mt-4 flex flex-col gap-2">
+                {group.items.map((skill) => (
+                  <li
+                    key={skill}
+                    className="flex gap-2 text-xs leading-relaxed text-foreground/80"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.35rem] h-1 w-1 shrink-0 rounded-full bg-accent"
+                    />
+                    <span>{skill}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-        {/* Skills Icons */}
-        <ItemLayout className={"col-span-full !p-2"}>
-          <img 
-            className="w-full h-auto" 
-            src="https://skillicons.dev/icons?i=react,js,ts,nextjs,svelte,tailwind,redux,nodejs,swift,firebase,github,gitlab,vscode,postman,figma" 
-            alt="Technical Skills" 
-            loading="lazy" 
-          />
-        </ItemLayout>
-       
-        {/* GitHub Streak */}
-        <ItemLayout className={"col-span-full md:col-span-6 !p-0"}>
-          <img 
-            className="w-full h-auto"  
-            src="https://github-readme-streak-stats.herokuapp.com?user=Saad-Ahmed-Khanzada&theme=dark&hide_border=true&type=svg&currStreakLabel=22D3EE&background=EB545400&ring=22D3EE"  
-            alt="GitHub Contribution Streak" 
-            loading="lazy" 
-          />
-        </ItemLayout>
-        
-        {/* Featured Repository */}
-        <ItemLayout className={"col-span-full md:col-span-6 !p-0"}>
-          <img 
-            className="w-full h-auto" 
-            src="https://github-readme-stats.vercel.app/api/pin/?username=Saad-Ahmed-Khanzada&repo=KorraApp-ReactNative&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false&description_lines_count=2" 
-            alt="Featured Project - Korra AI" 
-            loading="lazy" 
-          />
-        </ItemLayout>
+      {/* ---------------- Services ---------------- */}
+      <section>
+        <SectionHeading
+          eyebrow="Services"
+          title="How I'm usually brought in"
+          intro="Whether as an employee or on contract, engagements tend to fall into one of these six shapes."
+        />
 
-        {/* Automation Expertise */}
-        <ItemLayout className={"col-span-full xs:col-span-6 text-center"}>
-          <p className="font-semibold w-full text-xl sm:text-2xl text-accent">
-            N8N <sub className="font-semibold text-base">Workflow Expert</sub>
-          </p>
-        </ItemLayout>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {servicesData.map((service, index) => (
+            <Reveal
+              key={service.title}
+              delay={index * 0.05}
+              className="custom-bg-raised hover-lift flex h-full flex-col rounded-xl p-5 sm:p-6"
+            >
+              <h3 className="font-display text-base font-bold leading-snug text-foreground">
+                {service.title}
+              </h3>
+              <p className="mt-2.5 text-xs leading-relaxed text-foreground/75 sm:text-sm">
+                {service.description}
+              </p>
+              <ul className="mt-4 flex flex-col gap-1.5 border-t border-accent/15 pt-4">
+                {service.deliverables.map((deliverable) => (
+                  <li
+                    key={deliverable}
+                    className="flex gap-2 text-xs leading-relaxed text-muted"
+                  >
+                    <span aria-hidden="true" className="text-accent/60">
+                      ▸
+                    </span>
+                    <span>{deliverable}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-        {/* AI Integration */}
-        <ItemLayout className={"col-span-full xs:col-span-6 text-center"}>
-          <p className="font-semibold w-full text-xl sm:text-2xl text-accent">
-            AI <sub className="font-semibold text-base">Integration Specialist</sub>
-          </p>
-        </ItemLayout>
-      </div>
-    </section>
+      {/* ---------------- GitHub activity ---------------- */}
+      <section>
+        <SectionHeading
+          eyebrow="Open source activity"
+          title="GitHub"
+          intro="Most of my professional work lives in private client repositories, so public activity understates the volume."
+        />
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal className="custom-bg-raised overflow-hidden rounded-xl p-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="h-auto w-full"
+              src="https://github-readme-stats.vercel.app/api/top-langs/?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false&layout=compact"
+              alt="Most used programming languages on GitHub"
+              loading="lazy"
+            />
+          </Reveal>
+
+          <Reveal
+            delay={0.06}
+            className="custom-bg-raised overflow-hidden rounded-xl p-2 lg:col-span-2"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="h-auto w-full"
+              src="https://github-readme-stats.vercel.app/api?username=Saad-Ahmed-Khanzada&theme=transparent&hide_border=true&title_color=22D3EE&text_color=FFFFFF&icon_color=22D3EE&text_bold=false"
+              alt="GitHub contribution statistics"
+              loading="lazy"
+            />
+          </Reveal>
+
+          <Reveal
+            delay={0.12}
+            className="custom-bg-raised overflow-hidden rounded-xl p-2 sm:col-span-2 lg:col-span-3"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="h-auto w-full"
+              src="https://github-readme-streak-stats.herokuapp.com?user=Saad-Ahmed-Khanzada&theme=dark&hide_border=true&type=svg&currStreakLabel=22D3EE&background=EB545400&ring=22D3EE"
+              alt="GitHub contribution streak"
+              loading="lazy"
+            />
+          </Reveal>
+        </div>
+      </section>
+    </div>
   );
 };
 

@@ -1,193 +1,98 @@
 "use client";
+
 import React from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
+import TechStackCard from "./TechStackCard";
+import { techCategories } from "@/app/data";
 
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
+    transition: { staggerChildren: 0.04 },
   },
 };
 
-const item = {
-  hidden: { opacity: 0, y: 20, scale: 0.9 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10
-    }
-  },
-};
+/*
+  Tech stack grouped by role in the stack rather than shown as one flat grid.
 
-// Tech icon mapping - using skill icons or custom fallbacks
-const getTechIcon = (iconName, color, techName) => {
-  const iconMap = {
-    react: "react",
-    svelte: "svelte", 
-    javascript: "js",
-    typescript: "ts",
-    tailwindcss: "tailwind",
-    redux: "redux",
-    swift: "swift",
-    nextjs: "nextjs",
-    axios: "", // closest approximation
-    n8n: "", // closest approximation
-    openai: "python", // closest approximation for AI
-    expo: "", // use react icon as fallback
-    googleplay: "android" // use android icon as fallback
-  };
-
-  const skillIconName = iconMap[iconName] || iconName;
-  
-  return (
-    <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-4 mx-auto overflow-hidden">
-      <img
-        src={`https://skillicons.dev/icons?i=${skillIconName}&theme=dark`}
-        alt={techName}
-        className="w-full h-full object-contain"
-        onError={(e) => {
-          // Fallback to colored div if icon doesn't load
-          e.target.style.display = 'none';
-          e.target.nextSibling.style.display = 'flex';
-        }}
-      />
-      <div 
-        className="w-full h-full rounded-lg items-center justify-center text-2xl font-bold text-white hidden"
-        style={{ backgroundColor: color }}
-      >
-        {getCustomIcon(iconName, techName)}
-      </div>
-    </div>
-  );
-};
-
-// Custom icons for technologies not available in skillicons
-const getCustomIcon = (iconName, techName) => {
-  const customIcons = {
-    expo: "⚡",
-    googleplay: "📱",
-    n8n: "🔄",
-    openai: "🤖",
-    axios: "🌐"
-  };
-  
-  return customIcons[iconName] || techName.charAt(0).toUpperCase();
-};
-
-const TechCard = ({ tech, index }) => {
-  return (
-    <motion.div
-      variants={item}
-      whileHover={{ 
-        scale: 1.05, 
-        transition: { duration: 0.2 } 
-      }}
-      whileTap={{ scale: 0.95 }}
-      className="custom-bg p-6 rounded-xl text-center group cursor-pointer hover:shadow-glass-sm transition-all duration-300"
-    >
-      {/* Tech Icon */}
-      {getTechIcon(tech.icon, tech.color, tech.name)}
-
-      {/* Tech Name */}
-      <h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors duration-300 mb-2">
-        {tech.name}
-      </h3>
-
-      {/* Tech Description */}
-      <p className="text-sm text-muted group-hover:text-foreground/80 transition-colors duration-300 leading-relaxed">
-        {tech.description}
-      </p>
-
-      {/* Hover Effect Accent Line */}
-      <div className="w-0 h-1 bg-accent mx-auto mt-4 group-hover:w-full transition-all duration-300 rounded-full"></div>
-    </motion.div>
-  );
+  The "Exposure" group is deliberately separated and labelled: Flutter and
+  C++ belong on this page as evidence of adaptability, but listing them
+  beside React at four years would misrepresent the depth.
+*/
+const groupBlurbs = {
+  Frontend: "Where most of my production web work lives.",
+  Mobile: "Cross-platform delivery, including the native and release work.",
+  Languages: "Day-to-day working languages.",
+  State: "How I keep application state predictable at scale.",
+  Styling: "Design system implementation on web and mobile.",
+  "Backend & Data": "The service and data layer I integrate against and configure.",
+  "AI & Automation": "Automation and AI as deliverables, not experiments.",
+  "Release & DevOps": "Getting builds signed, submitted, and into the right environment.",
+  "Design & Tooling": "Working with designers and the rest of the toolchain.",
+  Exposure:
+    "Stacks I have shipped production fixes in without claiming them as core competencies — included as evidence of adaptability.",
 };
 
 const TechStackGrid = ({ techStack }) => {
-  // Group technologies by category
-  const groupedTech = techStack.reduce((acc, tech) => {
-    const category = tech.category;
-    if (!acc[category]) {
-      acc[category] = [];
-    }
-    acc[category].push(tech);
-    return acc;
-  }, {});
+  const groups = techCategories
+    .map((category) => ({
+      category,
+      items: techStack.filter((tech) => tech.category === category),
+    }))
+    .filter((group) => group.items.length > 0);
 
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="w-full max-w-6xl px-4 mx-auto space-y-12"
-    >
-      {Object.entries(groupedTech).map(([category, technologies]) => (
-        <div key={category} className="space-y-6">
-          {/* Category Header */}
+    <div className="flex w-full flex-col gap-10 sm:gap-12">
+      {groups.map((group, groupIndex) => (
+        <section key={group.category}>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center"
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-2"
           >
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-2">
-              {category}
-            </h2>
-            <div className="w-24 h-1 bg-accent mx-auto rounded-full"></div>
+            <div className="flex flex-wrap items-center gap-3">
+              <h2
+                className={clsx(
+                  "font-display text-lg font-bold sm:text-xl",
+                  group.category === "Exposure" ? "text-foreground/70" : "text-foreground"
+                )}
+              >
+                {group.category}
+              </h2>
+              <span className="tag-neutral">{group.items.length}</span>
+            </div>
+
+            {groupBlurbs[group.category] && (
+              <p className="max-w-2xl text-xs leading-relaxed text-muted sm:text-sm">
+                {groupBlurbs[group.category]}
+              </p>
+            )}
+
+            <div aria-hidden="true" className="hairline mt-1 h-px w-full" />
           </motion.div>
 
-          {/* Technology Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {technologies.map((tech, index) => (
-              <TechCard key={tech.name} tech={tech} index={index} />
+          <motion.ul
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+            className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          >
+            {group.items.map((tech) => (
+              <TechStackCard
+                key={`${group.category}-${tech.name}`}
+                {...tech}
+                subdued={group.category === "Exposure"}
+              />
             ))}
-          </div>
-        </div>
+          </motion.ul>
+        </section>
       ))}
-
-      {/* Stats Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mt-16 text-center space-y-4"
-      >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-          <div className="custom-bg p-4 rounded-xl">
-            <div className="text-3xl font-bold text-accent">{techStack.length}</div>
-            <div className="text-sm text-muted">Technologies</div>
-          </div>
-          
-          <div className="custom-bg p-4 rounded-xl">
-            <div className="text-3xl font-bold text-accent">
-              {Object.keys(groupedTech).length}
-            </div>
-            <div className="text-sm text-muted">Categories</div>
-          </div>
-          
-          <div className="custom-bg p-4 rounded-xl">
-            <div className="text-3xl font-bold text-accent">3+</div>
-            <div className="text-sm text-muted">Years Exp.</div>
-          </div>
-          
-          <div className="custom-bg p-4 rounded-xl">
-            <div className="text-3xl font-bold text-accent">16</div>
-            <div className="text-sm text-muted">Projects</div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

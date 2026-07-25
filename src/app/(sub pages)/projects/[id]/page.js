@@ -1,183 +1,357 @@
 import Image from "next/image";
-import { notFound } from "next/navigation";
-import { projectsData } from "@/app/data";
-import HomeBtn from "@/components/HomeBtn";
-import { ArrowLeft, Calendar, Code, Smartphone, Globe } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { projectsData, personalData } from "@/app/data";
+import Reveal from "@/components/ui/Reveal";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CalendarDays,
+  Clock,
+  Code,
+  Smartphone,
+  Globe,
+  Bot,
+  Layers,
+  Lock,
+  Building2,
+  UserCircle,
+  AlertTriangle,
+  Lightbulb,
+  TrendingUp,
+  Trophy,
+  ListChecks,
+} from "lucide-react";
 
-// Generate static params for all projects
 export async function generateStaticParams() {
-  return projectsData.map((project) => ({
-    id: project.id.toString(),
-  }));
+  return projectsData.map((project) => ({ id: project.id.toString() }));
 }
 
-// Generate metadata for each project
 export async function generateMetadata({ params }) {
   const project = projectsData.find((p) => p.id.toString() === params.id);
-  
-  if (!project) {
-    return {
-      title: "Project Not Found",
-    };
-  }
+
+  if (!project) return { title: "Project not found" };
 
   return {
-    title: `${project.name} - Saad's Portfolio`,
+    title: project.name,
     description: project.description,
+    openGraph: {
+      title: `${project.name} — ${project.role}`,
+      description: project.description,
+    },
   };
+}
+
+const categoryIcons = {
+  "Mobile App": Smartphone,
+  "Web Application": Globe,
+  "AI & Automation": Bot,
+  "Web & Mobile": Layers,
+};
+
+// Two-column list block used for challenges/solutions and achievements.
+function ListPanel({ icon: Icon, title, items, accent = "accent" }) {
+  if (!items?.length) return null;
+
+  return (
+    <Reveal className="custom-bg-raised rounded-xl p-5 sm:p-6">
+      <h2 className="flex items-center gap-2 font-display text-base font-bold text-foreground sm:text-lg">
+        <Icon
+          className={`h-4 w-4 shrink-0 ${
+            accent === "warn" ? "text-amber-400" : "text-accent"
+          }`}
+          aria-hidden="true"
+        />
+        {title}
+      </h2>
+      <div aria-hidden="true" className="hairline mt-3 h-px w-full" />
+      <ul className="mt-4 flex flex-col gap-3">
+        {items.map((entry) => (
+          <li
+            key={entry}
+            className="flex gap-2.5 text-sm leading-relaxed text-foreground/80"
+          >
+            <span
+              aria-hidden="true"
+              className={`mt-[0.45rem] h-1.5 w-1.5 shrink-0 rounded-full ${
+                accent === "warn" ? "bg-amber-400/80" : "bg-accent"
+              }`}
+            />
+            <span>{entry}</span>
+          </li>
+        ))}
+      </ul>
+    </Reveal>
+  );
 }
 
 export default function ProjectDetail({ params }) {
   const project = projectsData.find((p) => p.id.toString() === params.id);
 
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
-  const getCategoryIcon = (category) => {
-    switch (category) {
-      case "Mobile App":
-        return <Smartphone className="w-5 h-5" />;
-      case "Web Application":
-        return <Globe className="w-5 h-5" />;
-      default:
-        return <Code className="w-5 h-5" />;
-    }
-  };
+  const CategoryIcon = categoryIcons[project.category] || Layers;
+
+  // Next / previous by recency, so a recruiter can walk the portfolio
+  // without returning to the index between every case study.
+  const ordered = [...projectsData].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+  const position = ordered.findIndex((p) => p.id === project.id);
+  const previous = ordered[position - 1];
+  const next = ordered[position + 1];
 
   return (
     <>
-      {/* Background Image */}
       <Image
         src="/background/projects-background6.webp"
-        alt="background-image"
-        className="-z-50 fixed top-0 left-0 w-full h-full object-cover object-center opacity-20"
+        alt=""
+        className="fixed left-0 top-0 -z-50 h-full w-full object-cover object-center opacity-20"
         priority
         fill
         sizes="100vw"
       />
 
-      <main className="flex min-h-screen flex-col items-center justify-center px-8 xs:px-16 py-20 lg:px-32">
-        <HomeBtn />
-        
-        {/* Back to Projects Button */}
-        <Link 
-          href="/projects"
-          className="fixed top-4 right-4 z-50 flex items-center space-x-2 text-foreground rounded-full custom-bg p-3 hover:text-accent transition-colors"
-        >
-          <ArrowLeft className="w-5 h-5" />
-          <span className="hidden sm:inline">Back to Projects</span>
-        </Link>
+      <article id="main-content" className="page-shell max-w-4xl py-4">
+        <Reveal>
+          <Link
+            href="/projects"
+            className="-ml-2 inline-flex items-center gap-1.5 rounded-lg px-2 py-2 text-xs font-medium text-muted transition-colors hover:text-accent"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+            All projects
+          </Link>
+        </Reveal>
 
-        <article className="relative w-full max-w-4xl flex flex-col space-y-8">
-          {/* Project Header */}
-          <header className="text-center space-y-4">
-            <div className="flex items-center justify-center space-x-2 text-accent">
-              {getCategoryIcon(project.category)}
-              <span className="text-sm font-medium">{project.category}</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-accent">
-              {project.name}
-            </h1>
-            
-            <div className="flex items-center justify-center space-x-2 text-muted">
-              <Calendar className="w-4 h-4" />
-              <span>{new Date(project.date).toLocaleDateString("en-US", { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-              })}</span>
-            </div>
-          </header>
+        {/* ---------------- Header ---------------- */}
+        <Reveal className="mt-6 flex flex-col">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
+              <CategoryIcon className="h-4 w-4" aria-hidden="true" />
+              {project.category}
+            </span>
 
-          {/* Project Description */}
-          <div className="custom-bg p-6 md:p-8 rounded-xl">
-            <h2 className="text-2xl font-semibold text-foreground mb-4">Overview</h2>
-            <p className="text-foreground/90 leading-relaxed text-base md:text-lg">
+            {project.featured && <span className="tag">Featured</span>}
+
+            {project.confidential && (
+              <span className="inline-flex items-center gap-1 text-xs text-muted">
+                <Lock className="h-3 w-3" aria-hidden="true" />
+                Client name withheld
+              </span>
+            )}
+          </div>
+
+          <h1 className="mt-4 font-display text-2xl font-extrabold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            {project.name}
+          </h1>
+
+          <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
+            {project.description}
+          </p>
+        </Reveal>
+
+        {/* ---------------- Fact bar ---------------- */}
+        <Reveal delay={0.06} className="custom-bg-raised mt-7 grid gap-4 rounded-xl p-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p className="eyebrow flex items-center gap-1.5">
+              <UserCircle className="h-3 w-3" aria-hidden="true" />
+              Role
+            </p>
+            <p className="mt-1.5 text-sm font-semibold text-foreground">
+              {project.role}
+            </p>
+          </div>
+
+          <div>
+            <p className="eyebrow flex items-center gap-1.5">
+              <CalendarDays className="h-3 w-3" aria-hidden="true" />
+              Timeline
+            </p>
+            <p className="mt-1.5 text-sm font-semibold text-foreground">
+              {project.period}
+            </p>
+          </div>
+
+          <div>
+            <p className="eyebrow flex items-center gap-1.5">
+              <Clock className="h-3 w-3" aria-hidden="true" />
+              Duration
+            </p>
+            <p className="mt-1.5 text-sm font-semibold text-foreground">
+              {project.duration}
+            </p>
+          </div>
+
+          <div>
+            <p className="eyebrow flex items-center gap-1.5">
+              <Building2 className="h-3 w-3" aria-hidden="true" />
+              Context
+            </p>
+            <p className="mt-1.5 text-sm font-semibold text-foreground">
+              {project.employer || project.client}
+            </p>
+            {project.employer && project.client && (
+              <p className="mt-0.5 text-xs text-muted">{project.client}</p>
+            )}
+          </div>
+        </Reveal>
+
+        <div className="mt-6 flex flex-col gap-5">
+          {/* ---------------- Overview ---------------- */}
+          <Reveal className="custom-bg-raised rounded-xl p-5 sm:p-6">
+            <h2 className="font-display text-base font-bold text-foreground sm:text-lg">
+              Overview
+            </h2>
+            <div aria-hidden="true" className="hairline mt-3 h-px w-full" />
+            <p className="mt-4 text-sm leading-relaxed text-foreground/85 sm:text-[0.95rem]">
               {project.detailedDescription}
             </p>
+          </Reveal>
+
+          {/* ---------------- Responsibilities ---------------- */}
+          <ListPanel
+            icon={ListChecks}
+            title="My responsibilities"
+            items={project.responsibilities}
+          />
+
+          {/* ---------------- Challenges & solutions ---------------- */}
+          <div className="grid gap-5 lg:grid-cols-2">
+            <ListPanel
+              icon={AlertTriangle}
+              title="Challenges"
+              items={project.challenges}
+              accent="warn"
+            />
+            <ListPanel
+              icon={Lightbulb}
+              title="How I solved them"
+              items={project.solutions}
+            />
           </div>
 
-          {/* Technologies Used */}
-          <div className="custom-bg p-6 md:p-8 rounded-xl">
-            <h2 className="text-2xl font-semibold text-foreground mb-4 flex items-center space-x-2">
-              <Code className="w-6 h-6" />
-              <span>Technologies Used</span>
+          {/* ---------------- Impact ---------------- */}
+          {project.impact && (
+            <Reveal className="custom-bg-raised rounded-xl border-l-2 border-l-accent p-5 sm:p-6">
+              <h2 className="flex items-center gap-2 font-display text-base font-bold text-foreground sm:text-lg">
+                <TrendingUp className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+                Business impact
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/85 sm:text-[0.95rem]">
+                {project.impact}
+              </p>
+            </Reveal>
+          )}
+
+          {/* ---------------- Achievements ---------------- */}
+          <ListPanel
+            icon={Trophy}
+            title="Key achievements"
+            items={project.achievements}
+          />
+
+          {/* ---------------- Features ---------------- */}
+          {project.features?.length > 0 && (
+            <Reveal className="custom-bg-raised rounded-xl p-5 sm:p-6">
+              <h2 className="font-display text-base font-bold text-foreground sm:text-lg">
+                What was built
+              </h2>
+              <div aria-hidden="true" className="hairline mt-3 h-px w-full" />
+              <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                {project.features.map((feature) => (
+                  <li
+                    key={feature}
+                    className="flex items-start gap-2.5 rounded-lg border border-muted/10 bg-background/30 p-3 text-xs leading-relaxed text-foreground/80 sm:text-sm"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                    />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          )}
+
+          {/* ---------------- Stack ---------------- */}
+          <Reveal className="custom-bg-raised rounded-xl p-5 sm:p-6">
+            <h2 className="flex items-center gap-2 font-display text-base font-bold text-foreground sm:text-lg">
+              <Code className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+              Technologies used
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {project.technologies.map((tech, index) => (
-                <div 
-                  key={index}
-                  className="bg-background/50 border border-accent/20 rounded-lg p-3 text-center hover:border-accent/40 transition-colors"
+            <div aria-hidden="true" className="hairline mt-3 h-px w-full" />
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <li
+                  key={tech}
+                  className="rounded-lg border border-accent/20 bg-background/50 px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-accent/50 sm:text-sm"
                 >
-                  <span className="text-foreground font-medium text-sm">{tech}</span>
-                </div>
+                  {tech}
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </Reveal>
+        </div>
 
-          {/* Key Features */}
-          <div className="custom-bg p-6 md:p-8 rounded-xl">
-            <h2 className="text-2xl font-semibold text-foreground mb-4">Key Features</h2>
-            <div className="grid gap-3">
-              {project.features.map((feature, index) => (
-                <div 
-                  key={index}
-                  className="flex items-start space-x-3 p-3 rounded-lg bg-background/30 border border-muted/10 hover:border-accent/20 transition-colors"
-                >
-                  <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
-                  <span className="text-foreground/90">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Project Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="custom-bg p-6 rounded-xl text-center">
-              <div className="text-3xl font-bold text-accent mb-2">{project.technologies.length}</div>
-              <div className="text-muted">Technologies</div>
-            </div>
-            
-            <div className="custom-bg p-6 rounded-xl text-center">
-              <div className="text-3xl font-bold text-accent mb-2">{project.features.length}</div>
-              <div className="text-muted">Features</div>
-            </div>
-            
-            <div className="custom-bg p-6 rounded-xl text-center">
-              <div className="text-3xl font-bold text-accent mb-2">
-                {new Date().getFullYear() - new Date(project.date).getFullYear() || "Recent"}
-              </div>
-              <div className="text-muted">Years Ago</div>
-            </div>
-          </div>
-
-          {/* Additional Project Info */}
-          <div className="custom-bg p-6 md:p-8 rounded-xl">
-            <h2 className="text-2xl font-semibold text-foreground mb-4">Project Impact</h2>
-            <p className="text-foreground/80 leading-relaxed">
-              This project demonstrates my expertise in {project.technologies.slice(0, 3).join(", ")} 
-              and showcases my ability to deliver comprehensive {project.category.toLowerCase()} solutions. 
-              The implementation focuses on user experience, performance optimization, and scalable architecture 
-              to meet modern development standards.
-            </p>
-          </div>
-
-          {/* Contact CTA */}
-          <div className="custom-bg p-6 md:p-8 rounded-xl text-center">
-            <h3 className="text-xl font-semibold text-foreground mb-3">Interested in this project?</h3>
-            <p className="text-muted mb-4">Let&apos;s discuss how I can help you build something similar</p>
-            <Link 
-              href="/contact"
-              className="inline-flex items-center px-6 py-3 bg-accent text-background font-medium rounded-lg hover:bg-accent/90 transition-colors"
+        {/* ---------------- Prev / next ---------------- */}
+        <nav
+          aria-label="Project navigation"
+          className="mt-8 grid gap-4 sm:grid-cols-2"
+        >
+          {previous ? (
+            <Link
+              href={`/projects/${previous.id}`}
+              className="custom-bg group flex flex-col rounded-xl p-4 transition-colors hover:border-accent/55"
             >
-              Get In Touch
+              <span className="flex items-center gap-1.5 text-[0.7rem] uppercase tracking-wider text-muted">
+                <ArrowLeft className="h-3 w-3" aria-hidden="true" />
+                More recent
+              </span>
+              <span className="mt-1.5 font-display text-sm font-semibold text-foreground transition-colors group-hover:text-accent">
+                {previous.name}
+              </span>
             </Link>
+          ) : (
+            <span />
+          )}
+
+          {next && (
+            <Link
+              href={`/projects/${next.id}`}
+              className="custom-bg group flex flex-col rounded-xl p-4 text-right transition-colors hover:border-accent/55 sm:items-end"
+            >
+              <span className="flex items-center gap-1.5 text-[0.7rem] uppercase tracking-wider text-muted">
+                Earlier
+                <ArrowRight className="h-3 w-3" aria-hidden="true" />
+              </span>
+              <span className="mt-1.5 font-display text-sm font-semibold text-foreground transition-colors group-hover:text-accent">
+                {next.name}
+              </span>
+            </Link>
+          )}
+        </nav>
+
+        {/* ---------------- CTA ---------------- */}
+        <Reveal className="custom-bg-raised mt-6 flex flex-col items-center gap-3 rounded-xl p-6 text-center sm:p-8">
+          <h2 className="font-display text-lg font-bold text-foreground sm:text-xl">
+            Want the detail behind this?
+          </h2>
+          <p className="max-w-lg text-sm leading-relaxed text-foreground/75">
+            Happy to walk through the architecture, the decisions I&apos;d make
+            differently now, and what I learned.
+          </p>
+          <div className="mt-1 flex flex-wrap justify-center gap-3">
+            <Link href="/contact" className="btn-primary">
+              Get in touch
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <a href={`mailto:${personalData.email}`} className="btn-secondary">
+              {personalData.email}
+            </a>
           </div>
-        </article>
-      </main>
+        </Reveal>
+      </article>
     </>
   );
 }

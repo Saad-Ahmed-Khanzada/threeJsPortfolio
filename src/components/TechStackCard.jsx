@@ -1,84 +1,109 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import clsx from "clsx";
 
 const item = {
-  hidden: { opacity: 0, y: 20, scale: 0.9 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10
-    }
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-const getTechIcon = (iconName, color) => {
-  const iconMap = {
-    react: "react",
-    svelte: "svelte", 
-    javascript: "js",
-    typescript: "ts",
-    tailwindcss: "tailwind",
-    redux: "redux",
-    swift: "swift",
-    expo: "expo",
-    axios: "axios",
-    googleplay: "googleplay",
-    n8n: "nodejs",
-    openai: "python"
-  };
-
-  const skillIconName = iconMap[iconName] || iconName;
-  
-  return (
-    <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-4 mx-auto overflow-hidden">
-      <img
-        src={`https://skillicons.dev/icons?i=${skillIconName}&theme=dark`}
-        alt={iconName}
-        className="w-full h-full object-contain"
-        onError={(e) => {
-          // Fallback to colored div if icon doesn't load
-          e.target.style.display = 'none';
-          e.target.nextSibling.style.display = 'flex';
-        }}
-      />
-      <div 
-        className="w-full h-full rounded-lg items-center justify-center text-2xl font-bold text-white hidden"
-        style={{ backgroundColor: color }}
-      >
-        {iconName.charAt(0).toUpperCase()}
-      </div>
-    </div>
-  );
+// Maps our icon keys onto skillicons.dev slugs. An empty string means the
+// service has no icon for it and we fall back to a coloured monogram.
+const skillIconSlugs = {
+  react: "react",
+  svelte: "svelte",
+  javascript: "js",
+  typescript: "ts",
+  tailwindcss: "tailwind",
+  redux: "redux",
+  nextjs: "nextjs",
+  firebase: "firebase",
+  aws: "aws",
+  postman: "postman",
+  figma: "figma",
+  git: "git",
+  flutter: "flutter",
+  cpp: "cpp",
+  apple: "apple",
+  androidstudio: "androidstudio",
+  expo: "",
+  openai: "",
 };
 
-const TechStackCard = ({ tech, index }) => {
+const levelStyles = {
+  Expert: "border-accent/50 bg-accent/15 text-accent",
+  Advanced: "border-accent/30 bg-accent/10 text-accent/90",
+  Proficient: "border-muted/30 bg-background/50 text-foreground/70",
+  "Working knowledge": "border-muted/25 bg-background/50 text-muted",
+};
+
+const TechStackCard = ({
+  name,
+  description,
+  experience,
+  level,
+  icon,
+  color,
+  subdued = false,
+}) => {
+  const slug = skillIconSlugs[icon] ?? icon;
+  const monogram = name.slice(0, 2).toUpperCase();
+
   return (
-    <motion.div
+    <motion.li
       variants={item}
-      whileHover={{ 
-        scale: 1.05, 
-        transition: { duration: 0.2 } 
-      }}
-      whileTap={{ scale: 0.95 }}
-      className="custom-bg p-6 rounded-xl text-center group cursor-pointer hover:shadow-glass-sm transition-all duration-300"
+      className={clsx(
+        "custom-bg-raised hover-lift group flex flex-col rounded-xl p-4 transition-colors duration-300 hover:border-accent/50",
+        subdued && "opacity-80"
+      )}
     >
-      {getTechIcon(tech.icon, tech.color)}
+      <div className="flex items-start gap-3">
+        {/* Icon, with a monogram fallback so a blocked CDN never leaves a gap */}
+        <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-accent/20 bg-background/60">
+          {slug ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={`https://skillicons.dev/icons?i=${slug}&theme=dark`}
+              alt=""
+              className="h-7 w-7 object-contain"
+              loading="lazy"
+            />
+          ) : (
+            <span
+              className="font-display text-[0.7rem] font-bold"
+              style={{ color: color || "currentColor" }}
+            >
+              {monogram}
+            </span>
+          )}
+        </span>
 
-      <h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors duration-300 mb-2">
-        {tech.name}
-      </h3>
+        <div className="min-w-0 flex-1">
+          <h3 className="font-display text-sm font-bold leading-tight text-foreground transition-colors group-hover:text-accent">
+            {name}
+          </h3>
+          <p className="mt-1 text-[0.7rem] text-muted">{experience}</p>
+        </div>
+      </div>
 
-      <p className="text-sm text-muted group-hover:text-foreground/80 transition-colors duration-300 leading-relaxed">
-        {tech.description}
+      <p className="mt-3 text-xs leading-relaxed text-foreground/70">
+        {description}
       </p>
 
-      <div className="w-0 h-1 bg-accent mx-auto mt-4 group-hover:w-full transition-all duration-300 rounded-full"></div>
-    </motion.div>
+      <span
+        className={clsx(
+          "mt-3 self-start rounded-full border px-2 py-0.5 text-[0.65rem] font-semibold",
+          levelStyles[level] || levelStyles.Proficient
+        )}
+      >
+        {level}
+      </span>
+    </motion.li>
   );
 };
 

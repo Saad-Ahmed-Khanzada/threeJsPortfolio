@@ -1,11 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 import bg from "../../../../public/background/contact-background2.webp";
-import { techStackData } from "../../data";
+import { techStackData, personalData } from "../../data";
 import TechStackGrid from "@/components/TechStackGrid";
+import { ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Tech Stack - Saad's Portfolio",
-  description: "Technologies and tools I use for development including React, React Native, TypeScript, and more.",
+  title: "Tech Stack",
+  description:
+    "React, React Native, Next.js, SvelteKit, TypeScript, Redux Toolkit, Firebase, AWS, n8n — with honest experience levels for each, including stacks I've shipped in without claiming expertise.",
 };
 
 export default function TechStack() {
@@ -13,27 +16,55 @@ export default function TechStack() {
     <>
       <Image
         src={bg}
-        alt="background-image"
-        priority 
+        alt=""
+        priority
         sizes="100vw"
-        className="-z-50 fixed top-0 left-0 w-full h-full object-cover object-center opacity-20"
+        className="fixed left-0 top-0 -z-50 h-full w-full object-cover object-center opacity-20"
       />
 
-      <article className="relative w-full flex flex-col items-center justify-center space-y-8 py-8 sm:py-0">
-        <div className="flex flex-col items-center justify-center space-y-6 w-full">
-          <h1 className="text-accent font-semibold text-center text-4xl md:text-5xl capitalize">
-            Tech Stack
+      <div id="main-content" className="page-shell section-stack py-4">
+        <header className="flex flex-col items-center text-center">
+          <span className="eyebrow">Tech stack</span>
+
+          <h1 className="mt-3 font-display text-2xl font-extrabold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            What I work with
           </h1>
-          
-          <p className="font-light text-sm xs:text-base text-center max-w-2xl text-foreground/80">
-            Here are the technologies, frameworks, and tools I use to bring ideas to life. 
-            From mobile app development to web applications and automation workflows, 
-            these are the building blocks of my development journey.
+
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/75 sm:text-base">
+            Grouped by role in the stack, with the honest experience level for
+            each. Where I&apos;ve shipped production work in something without
+            being a specialist in it, that&apos;s labelled as such rather than
+            padded into the main list.
           </p>
 
-          <TechStackGrid techStack={techStackData} />
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            <span className="tag">{personalData.yearsExperience} years experience</span>
+            <span className="tag">{techStackData.length} technologies</span>
+          </div>
+        </header>
+
+        <TechStackGrid techStack={techStackData} />
+
+        <div className="custom-bg-raised flex flex-col items-center gap-3 rounded-xl p-6 text-center sm:p-8">
+          <h2 className="font-display text-lg font-bold text-foreground sm:text-xl">
+            Not seeing your stack?
+          </h2>
+          <p className="max-w-xl text-sm leading-relaxed text-foreground/75">
+            Two of the projects on this site were delivered in languages I
+            hadn&apos;t shipped production code in before starting. Ramping into
+            an unfamiliar codebase is a skill I&apos;ve deliberately built.
+          </p>
+          <div className="mt-1 flex flex-wrap justify-center gap-3">
+            <Link href="/experience" className="btn-primary">
+              How I do that
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <Link href="/contact" className="btn-secondary">
+              Get in touch
+            </Link>
+          </div>
         </div>
-      </article>
+      </div>
     </>
   );
 }

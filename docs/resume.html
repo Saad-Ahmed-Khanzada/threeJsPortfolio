@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Saad Ahmed Khanzada — Senior Software Engineer</title>
+<style>
+  /*
+    ATS-safe print stylesheet.
+
+    Deliberate constraints:
+      - single column, no CSS multi-column, no tables for content flow
+      - no icons, no images, no text in graphics — every word is real text
+      - standard system serif/sans stack, so glyph extraction is reliable
+      - section headings are plain text in document order
+    These are the things that make résumé parsers drop content.
+  */
+  @page { size: A4; margin: 11mm 12mm; }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9.15pt;
+    line-height: 1.36;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: #0b5f73; text-decoration: none; }
+
+  /* ---------- header ---------- */
+  header { border-bottom: 1.6pt solid #0b5f73; padding-bottom: 7pt; margin-bottom: 10pt; }
+
+  h1 {
+    font-size: 20pt;
+    letter-spacing: 0.4pt;
+    margin: 0 0 2pt;
+    font-weight: 700;
+    color: #0d0d0d;
+  }
+
+  .headline {
+    font-size: 10.2pt;
+    font-weight: 600;
+    color: #0b5f73;
+    margin: 0 0 5pt;
+    letter-spacing: 0.2pt;
+  }
+
+  .contact { font-size: 8.7pt; color: #333; margin: 0; }
+  .contact span { white-space: nowrap; }
+  .sep { color: #9aa; padding: 0 4pt; }
+
+  /* ---------- sections ---------- */
+  h2 {
+    font-size: 9.2pt;
+    text-transform: uppercase;
+    letter-spacing: 1.1pt;
+    color: #0b5f73;
+    border-bottom: 0.6pt solid #c8d4d8;
+    padding-bottom: 2pt;
+    margin: 7pt 0 4pt;
+    font-weight: 700;
+    page-break-after: avoid;
+  }
+
+  p { margin: 0 0 5pt; }
+  .summary { text-align: justify; }
+
+  /* ---------- roles ---------- */
+  .role { margin-bottom: 7pt; page-break-inside: avoid; }
+  .role:last-child { margin-bottom: 2pt; }
+
+  .role-head { margin-bottom: 1.5pt; }
+
+  .role-title {
+    font-size: 10.4pt;
+    font-weight: 700;
+    color: #0d0d0d;
+  }
+  .role-company { font-weight: 700; color: #0b5f73; }
+
+  .role-meta {
+    font-size: 8.7pt;
+    color: #444;
+    margin: 0 0 1.5pt;
+  }
+
+  .role-note {
+    font-size: 8.4pt;
+    color: #555;
+    font-style: italic;
+    margin: 0 0 3.5pt;
+  }
+
+  ul { margin: 0 0 3pt; padding-left: 11.5pt; }
+  li { margin-bottom: 2pt; }
+
+  .stack {
+    font-size: 8.4pt;
+    color: #444;
+    margin: 2pt 0 0;
+  }
+  .stack strong { color: #0b5f73; }
+
+  /* ---------- skills ---------- */
+  .skill-row { margin-bottom: 3pt; font-size: 9.3pt; }
+  .skill-label { font-weight: 700; color: #0d0d0d; }
+
+  .competencies { font-size: 9.3pt; text-align: justify; margin: 0; }
+
+  /* ---------- projects ---------- */
+  .project { margin-bottom: 5pt; page-break-inside: avoid; }
+  .project-name { font-weight: 700; color: #0d0d0d; }
+  .project-role { font-style: italic; color: #444; font-size: 8.9pt; }
+
+  /* ---------- compact tail sections ---------- */
+  .tail { margin-bottom: 2.5pt; }
+  .tail-title { font-weight: 700; color: #0d0d0d; }
+  .tail-meta { color: #444; font-size: 8.9pt; }
+
+  .three-col { display: flex; gap: 14pt; page-break-inside: avoid; }
+  .three-col > div { flex: 1; }
+  .three-col h2 { margin-top: 8pt; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SAAD AHMED KHANZADA</h1>
+  <p class="headline">Senior Software Engineer &nbsp;·&nbsp; Product Engineer &nbsp;·&nbsp; Technical Lead</p>
+  <p class="contact">
+    <span>saadkhanzada1@gmail.com</span><span class="sep">|</span>
+    <span>+92 324 2400532</span><span class="sep">|</span>
+    <span>Karachi, Pakistan — open to remote worldwide</span><br>
+    <span>linkedin.com/in/saad-ahmed-khanzada</span><span class="sep">|</span>
+    <span>github.com/Saad-Ahmed-Khanzada</span><span class="sep">|</span>
+    <span>saad-ahmed-khanzada-portfolio.vercel.app</span>
+  </p>
+</header>
+
+<h2>Professional Summary</h2>
+<p class="summary">
+  Senior software engineer with 4+ years delivering web and mobile products for clients across the US, UK, UAE,
+  and Pakistan. Works the full delivery lifecycle: client requirement sessions, decomposing business goals into
+  technical plans, production React, React Native, Next.js, and SvelteKit code, coordinating backend, QA, and
+  design, and owning release engineering through App Store Connect, Google Play Console, and multi-environment
+  configuration. Currently leads a 12-person cross-functional team. Uses AI-assisted engineering to become
+  productive in unfamiliar codebases fast — including shipping production fixes in Flutter and C++ with no prior
+  production experience in either.
+</p>
+
+<h2>Core Competencies</h2>
+<p class="competencies">
+  Web &amp; Mobile Product Development · Technical Leadership · Cross-Functional Team Coordination ·
+  Client Communication &amp; Requirement Gathering · Project Ownership &amp; Delivery Management ·
+  Sprint Planning · Code Review · Release Engineering · Mobile App Store Delivery · REST API Integration ·
+  State Management Architecture · Performance Optimisation · AI-Assisted Engineering · Workflow Automation
+</p>
+
+<h2>Technical Skills</h2>
+<div class="skill-row"><span class="skill-label">Languages:</span> TypeScript, JavaScript (ES6+), HTML5, CSS3</div>
+<div class="skill-row"><span class="skill-label">Frontend:</span> React (4 yrs), Next.js (2 yrs), SvelteKit (1 yr), Tailwind CSS, ShadCN, NextUI</div>
+<div class="skill-row"><span class="skill-label">Mobile:</span> React Native (4 yrs), Expo, React Navigation, Gesture Handler, NativeWind</div>
+<div class="skill-row"><span class="skill-label">State &amp; Data:</span> Redux Toolkit, Redux, REST APIs, Axios, PocketBase</div>
+<div class="skill-row"><span class="skill-label">Backend &amp; Cloud:</span> Firebase (Auth, Firestore, Cloud Messaging), AWS (integrations, Secrets Manager), FastAPI integration</div>
+<div class="skill-row"><span class="skill-label">Release &amp; DevOps:</span> App Store Connect, Google Play Console, native iOS/Android configuration, multi-environment setup (dev/staging/prod), Git</div>
+<div class="skill-row"><span class="skill-label">AI &amp; Automation:</span> n8n, OpenAI API, Claude, OpenAI Codex, custom AI coding agents</div>
+<div class="skill-row"><span class="skill-label">Testing &amp; Tooling:</span> Cypress, Postman, Figma, VS Code &nbsp;·&nbsp; <span class="skill-label">Exposure (production fixes, not core stacks):</span> Flutter / Dart, C++</div>
+
+<h2>Professional Experience</h2>
+
+<div class="role">
+  <div class="role-head">
+    <span class="role-title">Senior Software Engineer</span> — <span class="role-company">Bitrupt</span>
+  </div>
+  <p class="role-meta">Dover, Delaware, United States (Remote) &nbsp;·&nbsp; December 2024 – Present</p>
+  <p class="role-note">Hired as Senior React &amp; React Native Developer; scope now spans technical leadership and delivery ownership.</p>
+  <ul>
+    <li>Lead delivery for a <strong>12-person cross-functional team</strong> spanning frontend, backend, QA, design, and business analysis — assumed ownership mid-engagement when the Project Manager departed, absorbing planning, task assignment, and client reporting without pausing the delivery schedule.</li>
+    <li>Own client relationships directly: run requirement-gathering sessions, feature discussions, and release demonstrations, and convert business goals into prioritised technical tasks for the team.</li>
+    <li>Deliver production React Native and Next.js applications across concurrent client products, including a US investment platform (InvestWizz), a compliance-gated corrections communication platform (CallMe), and a fitness application (Fitsono).</li>
+    <li>Shipped production defect fixes in a <strong>Flutter</strong> meditation application and a <strong>C++</strong> mobile codebase with no prior production experience in either language, using AI-assisted code analysis to reach working competence in days rather than months.</li>
+    <li>Own release engineering end to end: Firebase configuration, native iOS and Android setup, App Store Connect and Google Play Console submissions, and separate development, staging, and production environments verified against the correct backends, with credentials handled through AWS Secrets Manager.</li>
+    <li>Standardised Redux Toolkit state architecture and token/refresh-token authentication with protected navigation across mobile projects, removing repeated setup work between engagements.</li>
+    <li>Built AI-powered workflow automations in n8n and custom AI coding agents encoding team architecture standards, reducing the review-and-rewrite cost of AI-assisted development.</li>
+    <li>Mentor junior developers through structured code review and pairing, and review all team output before it reaches a client.</li>
+  </ul>
+  <!-- keep bullets at 8; the page budget is managed via the tail layout below -->
+  <p class="stack"><strong>Technologies:</strong> React Native, Expo, TypeScript, Redux Toolkit, React, Next.js, Firebase, AWS Secrets Manager, REST APIs, n8n, Flutter, C++</p>
+</div>
+
+<div class="role">
+  <div class="role-head">
+    <span class="role-title">Senior Frontend Developer</span> — <span class="role-company">7G Fuse</span>
+  </div>
+  <p class="role-meta">Abu Dhabi, United Arab Emirates (Remote) &nbsp;·&nbsp; June 2024 – January 2025</p>
+  <ul>
+    <li>Led frontend development of a network-integrated portal system, owning the interface architecture and its integration boundary with backend services.</li>
+    <li>Delivered a responsive progressive web application in Next.js and TypeScript with consistent behaviour across desktop, tablet, and mobile.</li>
+    <li>Built a reusable component layer on Tailwind CSS, ShadCN, and NextUI, eliminating duplicated UI work across portal modules.</li>
+    <li>Integrated REST and FastAPI endpoints to replace static placeholder content with live backend data.</li>
+    <li>Optimised page delivery and web performance to keep the portal responsive on constrained connections.</li>
+  </ul>
+  <p class="stack"><strong>Technologies:</strong> Next.js, TypeScript, Tailwind CSS, ShadCN, NextUI, REST APIs, FastAPI, PWA</p>
+</div>
+
+<div class="role">
+  <div class="role-head">
+    <span class="role-title">Frontend Developer</span> — <span class="role-company">Vectracom Pvt Ltd</span>
+  </div>
+  <p class="role-meta">Karachi, Pakistan &nbsp;·&nbsp; July 2023 – July 2024</p>
+  <ul>
+    <li>Delivered and secured client approval for <strong>three progressive web applications for Zong, Ufone, and Jazz</strong> — Pakistan's largest mobile network operators.</li>
+    <li>Expanded scope from interface work into full-stack SvelteKit delivery, taking ownership of server-side rendering strategy and data access rather than consuming a finished API.</li>
+    <li>Integrated PocketBase as the data backend for the Jazz platform, handling data management and retrieval end to end.</li>
+    <li>Partnered directly with designers in Figma, editing designs in place to resolve implementation conflicts before they reached development.</li>
+    <li>Managed server-side and client-side rendering boundaries deliberately to preserve user data integrity across PWA sessions.</li>
+  </ul>
+  <p class="stack"><strong>Technologies:</strong> SvelteKit, JavaScript, Tailwind CSS, PocketBase, PWA, SSR, React, Figma</p>
+</div>
+
+<div class="role">
+  <div class="role-head">
+    <span class="role-title">Lead Frontend Developer</span> — <span class="role-company">WordFibre Ltd</span>
+  </div>
+  <p class="role-meta">Stirling, Scotland, United Kingdom (Remote) &nbsp;·&nbsp; December 2022 – July 2023</p>
+  <ul>
+    <li>Coordinated cross-disciplinary teams to deliver technical initiatives on schedule and within budget — first role with accountability extending beyond individual contribution.</li>
+    <li>Introduced structured Git branching and review workflow, eliminating the merge conflicts and overwritten work that had been slowing the team.</li>
+    <li>Built responsive interfaces that held together across viewport sizes, and improved handover quality across the shared development pipeline.</li>
+  </ul>
+  <p class="stack"><strong>Technologies:</strong> React, JavaScript, CSS3, Responsive Design, Git</p>
+</div>
+
+<h2>Selected Projects</h2>
+
+<div class="project">
+  <span class="project-name">Confidential Social Platform</span> —
+  <span class="project-role">Technical Lead · Feb 2026 – Present.</span>
+  Web and mobile social/creator platform; lead a 12-person cross-functional team while contributing production code on both surfaces. <em>React Native, Next.js, TypeScript.</em>
+</div>
+
+<div class="project">
+  <span class="project-name">InvestWizz</span> —
+  <span class="project-role">Team Lead &amp; React Native Developer · Sep 2025 – Feb 2026.</span>
+  US investment platform; owned sprint planning, delivery, and the client relationship alongside hands-on development. <em>React Native, TypeScript, Redux Toolkit, Firebase.</em>
+</div>
+
+<div class="project">
+  <span class="project-name">CallMe</span> —
+  <span class="project-role">Senior Mobile Engineer · Jan 2025 – Apr 2025.</span>
+  Compliance-gated platform for calling incarcerated family members via government-approved numbers. <em>React Native, Expo, TypeScript, Firebase.</em>
+</div>
+
+<div class="project">
+  <span class="project-name">Vastu</span> —
+  <span class="project-role">Production Support Engineer · Jul 2025 – Sep 2025.</span>
+  Delivered production bug fixes in a Flutter meditation app with no prior Flutter experience, via AI-assisted code analysis. <em>Flutter, Dart.</em>
+</div>
+
+<div class="project">
+  <span class="project-name">Walkaround</span> —
+  <span class="project-role">Production Support Engineer · Apr 2025 – Jun 2025.</span>
+  Traced failure paths and shipped surgical fixes in a C++ mobile codebase from a basic starting knowledge. <em>C++.</em>
+</div>
+
+<div class="project">
+  <span class="project-name">AI Workflow Automation Suite (n8n)</span> —
+  <span class="project-role">Automation Engineer &amp; AI Agent Architect · Jun 2025 – Present.</span>
+  AI customer-service handling with human escalation, voice order intake, and reusable coding agents encoding engineering standards. <em>n8n, OpenAI API, Claude.</em>
+</div>
+
+<!--
+  Three columns rather than two: with Education and Languages stacked in one
+  column the block was tall enough to break across a page boundary, pushing a
+  200-character orphan onto a third page. Balancing across three keeps the
+  whole tail on page two.
+-->
+<div class="three-col">
+  <div>
+    <h2>Education</h2>
+    <div class="tail">
+      <div class="tail-title">BS, Computer Science</div>
+      <div class="tail-meta">DHA Suffa University, Karachi</div>
+      <div class="tail-meta">Oct 2019 – Aug 2023</div>
+    </div>
+    <div class="tail">
+      <div class="tail-title">Higher Secondary / A-Levels</div>
+      <div class="tail-meta">Whales College, Karachi</div>
+      <div class="tail-meta">Aug 2017 – Aug 2019</div>
+    </div>
+  </div>
+
+  <div>
+    <h2>Certifications</h2>
+    <div class="tail">
+      <div class="tail-title">Cloud Solution Architecture (AWS)</div>
+      <div class="tail-meta">Hazza Institute of Technology</div>
+      <div class="tail-meta">Mar 2023 – Sep 2023</div>
+    </div>
+    <div class="tail">
+      <div class="tail-title">Cypress Automation Testing</div>
+      <div class="tail-meta">Jan 2022 – Mar 2022</div>
+    </div>
+    <div class="tail">
+      <div class="tail-title">Web Programming with ReactJS</div>
+      <div class="tail-meta">Jan 2022 – Feb 2022</div>
+    </div>
+  </div>
+
+  <div>
+    <h2>Languages</h2>
+    <div class="tail">
+      <div class="tail-title">Urdu</div>
+      <div class="tail-meta">Native / bilingual proficiency</div>
+    </div>
+    <div class="tail">
+      <div class="tail-title">English</div>
+      <div class="tail-meta">Full professional proficiency</div>
+    </div>
+    <div class="tail">
+      <div class="tail-title">German</div>
+      <div class="tail-meta">Basic proficiency</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,3 @@
-const { transform } = require('next/dist/build/swc');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -10,13 +8,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily:{
-        inter:[`var(--font-inter)`]
+        inter:[`var(--font-inter)`, 'system-ui', 'sans-serif'],
+        display:[`var(--font-sora)`, `var(--font-inter)`, 'system-ui', 'sans-serif'],
       },
       colors:{
         background:`rgb(var(--background))`,
+        surface:`rgb(var(--surface))`,
         foreground:`rgb(var(--foreground))`,
         muted:`rgb(var(--muted))`,
         accent:`rgb(var(--accent))`,
+        'accent-deep':`rgb(var(--accent-deep))`,
       },
       backgroundImage:{
         'firefly-radial': "radial-gradient(50% 50% at 50% 50%, rgba(34, 211, 238, 0.5) 0%, rgba(217,217,217, 0) 100%)"

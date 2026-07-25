@@ -1,10 +1,9 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Create navigation context
-const NavigationContext = createContext();
+const NavigationContext = createContext(null);
 
 export const useNavigation = () => {
   const context = useContext(NavigationContext);
@@ -14,90 +13,77 @@ export const useNavigation = () => {
   return context;
 };
 
-// Navigation Provider Component
 export const NavigationProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
-  // Enhanced loading detection
+  const startLoading = useCallback(() => setIsLoading(true), []);
+  const stopLoading = useCallback(() => setIsLoading(false), []);
+
+  /*
+    Show the loader when an internal link is clicked, and clear it once the
+    pathname actually changes.
+
+    The previous implementation reassigned router.push and router.replace to
+    wrapped versions on every effect run. That mutates an object shared across
+    the whole app, and because the effect depended on `router` it could patch
+    an already-patched method — each render layering another wrapper, and the
+    cleanup restoring a stale reference. Listening for clicks and reacting to
+    pathname is enough, and leaves the router untouched.
+  */
   useEffect(() => {
-    let timeoutId;
+    const handleLinkClick = (event) => {
+      // Ignore modified clicks — those open a new tab and never navigate here.
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
 
-    const startLoading = () => {
-      setIsLoading(true);
-      // Auto-hide loader after maximum time
-      timeoutId = setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
-    };
+      const anchor = event.target.closest("a");
+      if (!anchor) return;
 
-    const stopLoading = () => {
-      setIsLoading(false);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      const href = anchor.getAttribute("href");
+      if (
+        href &&
+        href.startsWith("/") &&
+        href !== pathname &&
+        anchor.target !== "_blank"
+      ) {
+        startLoading();
       }
     };
 
-    // Listen for navigation clicks on internal links
-    const handleLinkClick = (e) => {
-      const target = e.target.closest('a');
-      if (target) {
-        const href = target.getAttribute('href');
-        // Check if it's an internal navigation link
-        if (href && href.startsWith('/') && !href.startsWith('http') && href !== pathname) {
-          startLoading();
-        }
-      }
-    };
+    document.addEventListener("click", handleLinkClick);
+    return () => document.removeEventListener("click", handleLinkClick);
+  }, [pathname, startLoading]);
 
-    // Listen for programmatic navigation
-    const originalPush = router.push;
-    const originalReplace = router.replace;
-
-    router.push = (...args) => {
-      startLoading();
-      return originalPush.apply(router, args);
-    };
-
-    router.replace = (...args) => {
-      startLoading();
-      return originalReplace.apply(router, args);
-    };
-
-    // Add event listeners
-    document.addEventListener('click', handleLinkClick);
-
-    // Stop loading when route changes
+  // Clear on route settle, plus a safety timeout so a cancelled navigation
+  // can never leave the overlay stuck over the page.
+  useEffect(() => {
     stopLoading();
+  }, [pathname, stopLoading]);
 
-    return () => {
-      document.removeEventListener('click', handleLinkClick);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      // Restore original router methods
-      router.push = originalPush;
-      router.replace = originalReplace;
-    };
-  }, [pathname, router]);
-
-  const value = {
-    isLoading,
-    startLoading: () => setIsLoading(true),
-    stopLoading: () => setIsLoading(false),
-  };
+  useEffect(() => {
+    if (!isLoading) return;
+    const timeoutId = setTimeout(stopLoading, 2500);
+    return () => clearTimeout(timeoutId);
+  }, [isLoading, stopLoading]);
 
   return (
-    <NavigationContext.Provider value={value}>
+    <NavigationContext.Provider value={{ isLoading, startLoading, stopLoading }}>
       {children}
-      <NavigationLoader isLoading={isLoading} />
+      <RouteLoader isLoading={isLoading} />
     </NavigationContext.Provider>
   );
 };
 
-// Enhanced Navigation Loader Component
-const NavigationLoader = ({ isLoading }) => {
+const RouteLoader = ({ isLoading }) => {
   return (
     <AnimatePresence>
       {isLoading && (
@@ -105,99 +91,45 @@ const NavigationLoader = ({ isLoading }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
+          transition={{ duration: 0.18 }}
+          role="status"
+          aria-live="polite"
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-background/95 backdrop-blur-lg"
         >
-          {/* Main Loader Container */}
-          <div className="flex flex-col items-center space-y-6">
-            
-            {/* Elegant Spinner */}
-            <div className="relative">
-              {/* Outer Ring */}
-              <motion.div
+          <div className="flex flex-col items-center gap-5">
+            <div className="relative h-14 w-14">
+              <motion.span
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="w-16 h-16 border-2 border-accent/20 rounded-full"
+                className="absolute inset-0 rounded-full border-2 border-accent/20"
               />
-              
-              {/* Inner Ring */}
-              <motion.div
+              <motion.span
                 animate={{ rotate: -360 }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-2 border-2 border-transparent border-t-accent border-r-accent rounded-full"
+                transition={{ duration: 1.4, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-2 rounded-full border-2 border-transparent border-r-accent border-t-accent"
               />
-              
-              {/* Center Dot */}
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  opacity: [0.7, 1, 0.7]
-                }}
-                transition={{ duration: 1, repeat: Infinity }}
-                className="absolute inset-1/2 w-2 h-2 -ml-1 -mt-1 bg-accent rounded-full"
+              <motion.span
+                animate={{ scale: [1, 1.25, 1], opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 1.1, repeat: Infinity }}
+                className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent"
               />
             </div>
 
-            {/* Clean Loading Text */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-center"
+            <motion.p
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="font-display text-[0.7rem] font-semibold tracking-[0.2em] text-foreground/80"
             >
-              <motion.p
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="text-foreground font-medium tracking-wider text-sm"
-              >
-                LOADING
-              </motion.p>
-            </motion.div>
+              LOADING
+            </motion.p>
 
-            {/* Minimal Progress Bar */}
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "200px" }}
-              className="h-0.5 bg-accent/30 rounded-full overflow-hidden"
-            >
+            <div className="h-0.5 w-40 overflow-hidden rounded-full bg-accent/20">
               <motion.div
-                animate={{ 
-                  x: ["-100%", "100%"],
-                }}
-                transition={{
-                  duration: 1.2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="h-full w-20 bg-accent rounded-full"
+                animate={{ x: ["-100%", "220%"] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
+                className="h-full w-16 rounded-full bg-accent"
               />
-            </motion.div>
-          </div>
-
-          {/* Subtle Background Elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ 
-                  opacity: [0, 0.3, 0],
-                  scale: [0, 1, 0],
-                  x: [0, Math.random() * 100 - 50],
-                  y: [0, Math.random() * 100 - 50],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
-                className="absolute w-1 h-1 bg-accent rounded-full"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                }}
-              />
-            ))}
+            </div>
           </div>
         </motion.div>
       )}

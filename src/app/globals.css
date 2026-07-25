@@ -5,15 +5,49 @@
 @layer base {
   :root {
     /* Majestic Cyan Theme */
-    --background: 13 13 13;      /* Very dark black */
-    --foreground: 240 240 240;   /* Light text */
-    --muted: 140 140 140;        /* Gray */
-    --accent: 34 211 238;        /* Vibrant Cyan #22D3EE */
+    --background: 10 12 14; /* Near-black with a cool cast */
+    --surface: 18 22 26; /* Raised panel */
+    --foreground: 240 244 246; /* Primary text */
+    --muted: 148 160 168; /* Secondary text — WCAG AA on background */
+    --accent: 34 211 238; /* Cyan #22D3EE */
+    --accent-deep: 6 148 168; /* Darker cyan for gradients */
   }
 
-  /* Smooth transitions for better UX */
-  * {
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Typographic rhythm — display font for headings, Inter for body */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-sora), var(--font-inter), system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, consistent keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.3);
+    color: rgb(var(--foreground));
   }
 }
 
@@ -21,12 +55,48 @@
   .pause {
     animation-play-state: paused;
   }
-  
+
+  /* Glass panel — the core surface treatment */
   .custom-bg {
-    @apply bg-background/25 border border-accent/40 border-solid backdrop-blur-[8px] shadow-glass-inset hover:shadow-glass-sm;
+    @apply bg-background/40 border border-accent/25 border-solid backdrop-blur-[10px] shadow-glass-inset;
   }
 
-  /* Line clamp utilities for text truncation */
+  .custom-bg-raised {
+    @apply border border-accent/25 border-solid backdrop-blur-[12px] shadow-glass-inset;
+    background: linear-gradient(
+      160deg,
+      rgb(var(--surface) / 0.75) 0%,
+      rgb(var(--background) / 0.6) 100%
+    );
+  }
+
+  /* Section eyebrow label */
+  .eyebrow {
+    @apply text-accent text-[0.7rem] sm:text-xs font-semibold uppercase tracking-[0.18em];
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(
+      120deg,
+      rgb(var(--foreground)) 0%,
+      rgb(var(--accent)) 55%,
+      rgb(var(--accent-deep)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .hairline {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--accent) / 0.45),
+      transparent
+    );
+  }
+
   .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -48,46 +118,104 @@
     -webkit-line-clamp: 3;
   }
 
-  /* Cyan firefly background */
   .bg-firefly-radial {
     background: radial-gradient(circle, rgb(34, 211, 238) 0%, transparent 70%);
   }
 
-  /* Enhanced glow effects for cyan theme */
   .glow-accent {
-    box-shadow: 0 0 20px rgb(34 211 238 / 0.4);
+    box-shadow: 0 0 20px rgb(var(--accent) / 0.35);
   }
 
   .glow-accent-strong {
-    box-shadow: 0 0 30px rgb(34 211 238 / 0.6);
+    box-shadow: 0 0 34px rgb(var(--accent) / 0.5);
   }
 
-  /* Custom scrollbar with cyan accent */
+  /* Vignette so 3D models never fight foreground text */
+  .content-vignette::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse at center,
+      rgb(var(--background) / 0.85) 0%,
+      rgb(var(--background) / 0.55) 45%,
+      transparent 80%
+    );
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(34, 211, 238, 0.1);
+    background: rgb(var(--accent) / 0.08);
     border-radius: 3px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(34, 211, 238, 0.3);
+    background: rgb(var(--accent) / 0.3);
     border-radius: 3px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(34, 211, 238, 0.5);
+    background: rgb(var(--accent) / 0.5);
+  }
+}
+
+@layer components {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Cyan gradient utilities */
-  .cyan-gradient {
-    background: linear-gradient(135deg, rgb(34 211 238 / 0.1), rgb(6 182 212 / 0.2));
+  .hover-lift {
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
   }
 
-  .cyan-glow {
-    box-shadow: 0 0 25px rgb(34 211 238 / 0.4);
+  .hover-lift:hover {
+    transform: translateY(-3px);
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md border border-accent/25;
+    background: rgb(var(--background) / 0.8);
+  }
+
+  /* Primary CTA — solid accent, dark text for contrast */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3
+      bg-accent text-background font-semibold text-sm rounded-lg
+      transition-all duration-300 hover:bg-accent/90 hover:shadow-cyan-glow;
+  }
+
+  /* Secondary CTA — glass outline */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3
+      custom-bg text-foreground font-medium text-sm rounded-lg
+      transition-all duration-300 hover:text-accent hover:border-accent/60;
+  }
+
+  /* Small pill — used for tech tags and metadata */
+  .tag {
+    @apply inline-flex items-center rounded-full border border-accent/25
+      bg-accent/10 px-2.5 py-1 text-[0.7rem] font-medium text-accent
+      sm:text-xs;
+  }
+
+  .tag-neutral {
+    @apply inline-flex items-center rounded-md border border-muted/25
+      bg-background/50 px-2 py-1 text-[0.7rem] text-foreground/80 sm:text-xs;
+  }
+
+  /* Page shell — consistent max width and rhythm across sub-pages */
+  .page-shell {
+    @apply relative z-10 w-full max-w-6xl mx-auto flex flex-col;
+  }
+
+  .section-stack {
+    @apply flex flex-col gap-10 sm:gap-14 lg:gap-20;
   }
 }
 
@@ -100,13 +228,13 @@
   }
 }
 
-/* Cyan pulse animation */
 @keyframes cyan-pulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgb(34 211 238 / 0.4);
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgb(var(--accent) / 0.35);
   }
   50% {
-    box-shadow: 0 0 30px rgb(34 211 238 / 0.6);
+    box-shadow: 0 0 30px rgb(var(--accent) / 0.55);
   }
 }
 
@@ -114,32 +242,28 @@
   animation: cyan-pulse 2s ease-in-out infinite;
 }
 
-/* Add smooth transitions for better UX */
-@layer components {
-  .transition-smooth {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .hover-lift {
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .hover-lift:hover {
-    transform: translateY(-2px);
+/*
+  Respect the user's motion preference. The orbiting navigation, floating
+  models, and firefly field are all decorative — they stop entirely rather
+  than being sped up, which is the accessible behaviour.
+*/
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  /* Enhanced glass effect for cyan theme */
-  .glass-effect {
-    @apply backdrop-blur-md border border-accent/30;
-    background: rgb(13 13 13 / 0.8);
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 
-  /* Enhanced button styles for cyan theme */
-  .btn-primary {
-    @apply px-6 py-3 bg-accent text-black font-medium rounded-lg hover:bg-accent/90 transition-all duration-300 shadow-lg hover:shadow-xl;
-  }
-
-  .btn-secondary {
-    @apply px-6 py-3 custom-bg text-foreground font-medium rounded-lg hover:shadow-glass-sm transition-all duration-300;
+  .animate-spin-slow,
+  .animate-spin-slow-reverse,
+  .animate-cyan-pulse,
+  .animate-float {
+    animation: none !important;
   }
 }
