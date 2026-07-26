@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
     title: project.name,
     description: project.description,
     openGraph: {
-      title: `${project.name} — ${project.role}`,
+      title: `${project.name} · ${project.role}`,
       description: project.description,
     },
   };

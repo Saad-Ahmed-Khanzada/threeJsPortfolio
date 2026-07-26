@@ -106,7 +106,7 @@ const ProjectList = ({ projects }) => {
             <SectionHeading
               eyebrow="Featured work"
               title="The projects worth reading first"
-              intro="Selected for the scope of ownership involved rather than for how new they are."
+              intro="Picked for how much I owned on them, not for how recent they are."
               align="center"
             />
 

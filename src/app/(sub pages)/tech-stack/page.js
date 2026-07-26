@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata = {
   title: "Tech Stack",
   description:
-    "React, React Native, Next.js, SvelteKit, TypeScript, Redux Toolkit, Firebase, AWS, n8n — with honest experience levels for each, including stacks I've shipped in without claiming expertise.",
+    "React, React Native, Next.js, SvelteKit, TypeScript, Redux Toolkit, Firebase, AWS and n8n, with an honest experience level against each one.",
 };
 
 export default function TechStack() {
@@ -33,8 +33,8 @@ export default function TechStack() {
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/75 sm:text-base">
             Grouped by role in the stack, with the honest experience level for
             each. Where I&apos;ve shipped production work in something without
-            being a specialist in it, that&apos;s labelled as such rather than
-            padded into the main list.
+            being a specialist in it, it says so instead of being padded into the
+            main list.
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -52,7 +52,7 @@ export default function TechStack() {
           <p className="max-w-xl text-sm leading-relaxed text-foreground/75">
             Two of the projects on this site were delivered in languages I
             hadn&apos;t shipped production code in before starting. Ramping into
-            an unfamiliar codebase is a skill I&apos;ve deliberately built.
+            an unfamiliar codebase is a skill I&apos;ve worked at.
           </p>
           <div className="mt-1 flex flex-wrap justify-center gap-3">
             <Link href="/experience" className="btn-primary">

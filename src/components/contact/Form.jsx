@@ -56,7 +56,7 @@ export default function Form() {
       )
       .then(() => {
         toast.success(
-          "Message received — I'll get back to you within 24 hours.",
+          "Message received. I'll get back to you within 24 hours.",
           { id: toastId }
         );
         reset();
@@ -168,7 +168,7 @@ export default function Form() {
               required: "Please include a short message.",
               minLength: {
                 value: 30,
-                message: "A little more detail would help — 30 characters minimum.",
+                message: "A little more detail would help. 30 characters minimum.",
               },
               maxLength: {
                 value: 1000,

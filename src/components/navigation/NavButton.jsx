@@ -68,8 +68,17 @@ const NavButton = ({
   isCircular = false,
 }) => {
   return (
+    /*
+      pointer-events-auto restores clicks here: the parent <nav> sets
+      pointer-events-none so its full-viewport box does not block the hero
+      underneath it. Every interactive descendant has to opt back in.
+    */
     <div
-      className={isCircular ? "group absolute z-50 cursor-pointer" : "group z-50 cursor-pointer"}
+      className={
+        isCircular
+          ? "group pointer-events-auto absolute z-50 cursor-pointer"
+          : "group pointer-events-auto z-50 cursor-pointer"
+      }
       style={isCircular ? { transform: `translate(${x}, ${y})` } : {}}
     >
       <NavLink

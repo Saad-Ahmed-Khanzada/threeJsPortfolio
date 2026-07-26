@@ -32,7 +32,7 @@ const groupBlurbs = {
   "Release & DevOps": "Getting builds signed, submitted, and into the right environment.",
   "Design & Tooling": "Working with designers and the rest of the toolchain.",
   Exposure:
-    "Stacks I have shipped production fixes in without claiming them as core competencies — included as evidence of adaptability.",
+    "Stacks I have shipped production fixes in without claiming them as skills. They are here as evidence that I adapt.",
 };
 
 const TechStackGrid = ({ techStack }) => {

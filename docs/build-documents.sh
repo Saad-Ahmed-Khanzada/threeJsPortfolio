@@ -48,6 +48,9 @@ echo "==> Building Word documents"
   "$ROOT/docs/Portfolio-Content.docx" \
   "$ROOT/docs/Saad_Ahmed_Khanzada_Resume.docx"
 
+echo "==> Building cover letter and Loom script"
+"$BUILD/venv/bin/python" "$ROOT/docs/tools/make_career_docs.py" "$ROOT/docs"
+
 echo "==> Rendering résumé PDF"
 NODE_PATH="$BUILD/node_modules" node "$ROOT/docs/tools/make-pdf.js" \
   "$ROOT/docs/resume.html" \
@@ -83,4 +86,6 @@ echo
 echo "Done:"
 echo "  docs/Portfolio-Content.docx"
 echo "  docs/Saad_Ahmed_Khanzada_Resume.docx"
+echo "  docs/Cover-Letter.docx  (+ .md)"
+echo "  docs/Loom-Script.docx   (+ .md)"
 echo "  public/Saad_Ahmed_Khanzada_Resume.pdf"

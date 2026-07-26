@@ -12,7 +12,7 @@ const ProjectModel = dynamic(() => import("@/components/models/ProjectModel"), {
 export const metadata = {
   title: "Projects",
   description:
-    "20+ delivered web and mobile products — investment platforms, regulated communication apps, national telecom PWAs, fitness applications, and AI workflow automation.",
+    "20+ delivered web and mobile products: investment platforms, regulated communication apps, national telecom PWAs, fitness apps and AI workflow automation.",
 };
 
 export default function Projects() {
@@ -52,7 +52,7 @@ export default function Projects() {
 
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-foreground/75 sm:text-base">
             {personalData.projectsDelivered} projects across mobile, web, and
-            automation — for clients in the United States, United Kingdom, United
+            automation, for clients in the United States, United Kingdom, United
             Arab Emirates, and Pakistan. Each entry covers the role I held, the
             problem, and what I actually did about it.
           </p>

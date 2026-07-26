@@ -26,11 +26,11 @@ const siteUrl = "https://saad-ahmed-khanzada-portfolio.vercel.app";
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${personalData.name} — ${personalData.title}`,
+    default: `${personalData.name} · ${personalData.title}`,
     template: `%s | ${personalData.name}`,
   },
   description:
-    "Senior Software Engineer with 4+ years building production web and mobile products in React, React Native, Next.js, and SvelteKit — leading a 12-person cross-functional team, owning delivery, and working directly with clients.",
+    "Senior Software Engineer with 4+ years building web and mobile products in React, React Native, Next.js and SvelteKit. I lead a 12-person cross-functional team, own delivery, and work with clients directly.",
   keywords: [
     "Senior Software Engineer",
     "Technical Lead",
@@ -52,13 +52,13 @@ export const metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: `${personalData.name} — Portfolio`,
-    title: `${personalData.name} — ${personalData.title}`,
+    siteName: `${personalData.name} · Portfolio`,
+    title: `${personalData.name} · ${personalData.title}`,
     description: personalData.tagline,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${personalData.name} — ${personalData.title}`,
+    title: `${personalData.name} · ${personalData.title}`,
     description: personalData.tagline,
   },
   robots: {

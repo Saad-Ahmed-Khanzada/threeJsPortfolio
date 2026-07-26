@@ -47,11 +47,22 @@ const Navigation = () => {
     ? "calc(min(38vw, 40vh) - 1rem)"
     : "calc(min(40vw, 38vh) - 1rem)";
 
+  /*
+    pointer-events-none on the nav wrapper is load-bearing, not cosmetic.
+
+    Both layouts below are transparent elements covering the entire viewport
+    at z-40, and hit testing ignores transparency — an invisible element still
+    catches the click. Without this, the nav swallowed every click aimed at
+    the hero underneath it at z-20, so "View my work" and "Résumé" rendered,
+    hovered, and did nothing.
+
+    NavButton re-enables pointer events on the buttons themselves.
+  */
   if (isOrbit) {
     return (
       <nav
         aria-label="Primary"
-        className="fixed inset-0 z-40 flex h-screen w-full items-center justify-center"
+        className="pointer-events-none fixed inset-0 z-40 flex h-screen w-full items-center justify-center"
       >
         <motion.div
           variants={container}
@@ -89,7 +100,7 @@ const Navigation = () => {
   return (
     <nav
       aria-label="Primary"
-      className="fixed inset-0 z-40 flex h-screen w-full items-center justify-between px-2.5"
+      className="pointer-events-none fixed inset-0 z-40 flex h-screen w-full items-center justify-between px-2.5"
     >
       <motion.div
         variants={container}

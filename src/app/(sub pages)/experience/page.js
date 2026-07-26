@@ -22,7 +22,7 @@ import { ArrowRight, FileText, GraduationCap, Award, Languages } from "lucide-re
 export const metadata = {
   title: "Experience",
   description:
-    "4+ years of professional software engineering across the US, UK, UAE, and Pakistan — technical leadership of a 12-person cross-functional team, client-facing delivery ownership, and hands-on web and mobile development.",
+    "4+ years of professional software engineering across the US, UK, UAE and Pakistan. Technical leadership of a 12-person cross-functional team, client-facing delivery ownership, and hands-on web and mobile development.",
 };
 
 export default function Experience() {
@@ -45,7 +45,7 @@ export default function Experience() {
           <Reveal>
             <span className="eyebrow">Experience</span>
             <h1 className="mt-3 font-display text-2xl font-extrabold leading-tight text-foreground sm:text-4xl lg:text-[2.75rem]">
-              4+ years shipping products — and leading the teams behind them
+              4+ years shipping products, and leading the teams behind them
             </h1>
             <div aria-hidden="true" className="hairline mt-4 h-px w-24" />
             <p className="mt-5 max-w-3xl text-sm leading-relaxed text-foreground/80 sm:text-base">
@@ -100,7 +100,7 @@ export default function Experience() {
           <SectionHeading
             eyebrow="Work history"
             title="Where I've worked"
-            intro="Four roles across the United States, United Arab Emirates, United Kingdom, and Pakistan — each one widening the scope from writing features to owning delivery."
+            intro="Four roles across the United States, United Arab Emirates, United Kingdom and Pakistan. Each one widened the scope from writing features to owning delivery."
           />
 
           <div className="mt-8">
@@ -139,7 +139,7 @@ export default function Experience() {
           <SectionHeading
             eyebrow="Client feedback"
             title="What the people I've worked with say"
-            intro="Recommendations written and published by colleagues and clients themselves — no private correspondence reproduced here."
+            intro="Recommendations written and published by colleagues and clients themselves. Nothing private reproduced here."
           />
 
           <div className="mt-8">
@@ -215,7 +215,7 @@ export default function Experience() {
           </h2>
           <p className="max-w-xl text-sm leading-relaxed text-foreground/75">
             I&apos;m open to remote positions worldwide. Happy to walk through any
-            of this in detail — including the parts that went wrong and what I did
+            of this in detail, including the parts that went wrong and what I did
             about them.
           </p>
           <div className="mt-1 flex flex-wrap justify-center gap-3">

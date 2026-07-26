@@ -225,7 +225,7 @@ def build_resume(d, out_path):
         ("  |  ", {"size": 9, "color": SUBTLE}),
         (p["phone"], {"size": 9}),
         ("  |  ", {"size": 9, "color": SUBTLE}),
-        (f'{p["location"]} — open to remote worldwide', {"size": 9}),
+        (f'{p["location"]} · open to remote worldwide', {"size": 9}),
     ], space_after=1)
 
     links = rich(doc, [
@@ -274,7 +274,7 @@ def build_resume(d, out_path):
     for i, role in enumerate(d["experienceData"]):
         rich(doc, [
             (role["position"], {"bold": True, "size": 11}),
-            ("  —  ", {"size": 11, "color": SUBTLE}),
+            ("  |  ", {"size": 11, "color": SUBTLE}),
             (role["company"], {"bold": True, "size": 11, "color": ACCENT}),
         ], space_before=(0 if i == 0 else 8), space_after=1)
 
@@ -304,7 +304,7 @@ def build_resume(d, out_path):
     for pr in featured[:6]:
         rich(doc, [
             (pr["name"], {"bold": True, "size": 10}),
-            ("  —  ", {"size": 10, "color": SUBTLE}),
+            ("  ·  ", {"size": 10, "color": SUBTLE}),
             (f'{pr["role"]} · {pr["period"]}', {"italic": True, "size": 9.3, "color": SUBTLE}),
         ], space_before=5, space_after=1)
         para(doc, pr["description"], size=9.5, space_after=1, indent=0.12)
@@ -316,7 +316,7 @@ def build_resume(d, out_path):
     for e in d["educationData"]:
         rich(doc, [
             (e["qualification"], {"bold": True, "size": 9.8}),
-            ("  —  ", {"size": 9.8, "color": SUBTLE}),
+            ("  ·  ", {"size": 9.8, "color": SUBTLE}),
             (f'{e["institution"]}, {e["location"]}  ·  {e["period"]}',
              {"size": 9.3, "color": SUBTLE}),
         ], space_after=2)
@@ -325,7 +325,7 @@ def build_resume(d, out_path):
     for c in d["certificationsData"]:
         rich(doc, [
             (c["name"], {"bold": True, "size": 9.8}),
-            ("  —  ", {"size": 9.8, "color": SUBTLE}),
+            ("  ·  ", {"size": 9.8, "color": SUBTLE}),
             (f'{c["issuer"]}  ·  {c["period"]}', {"size": 9.3, "color": SUBTLE}),
         ], space_after=2)
 
@@ -711,14 +711,14 @@ def build_portfolio_doc(d, out_path):
         "Never republish a quote taken from private correspondence — Slack, "
         "email, WhatsApp, a call transcript — without asking first. Ask them "
         "to write a sentence they are happy to see published instead.",
-        "Anonymising is not sufficient on its own. A client can usually "
-        "identify themselves and their project from an anonymised quote, so "
+        "Anonymizing is not sufficient on its own. A client can usually "
+        "identify themselves and their project from an anonymized quote, so "
         "permission is still required for the quote itself.",
         "Check the engagement's NDA before naming the client or product at "
         "all. Where the build is unreleased, keep it in the confidential form "
         "already used for the social platform project.",
         "Record what was agreed in the consent field so a later edit cannot "
-        "accidentally promote an anonymised quote to a named one.",
+        "accidentally promote an anonymized quote to a named one.",
     ]:
         bullet(doc, rule, size=9.5, indent=0.12)
 
@@ -731,11 +731,11 @@ def build_portfolio_doc(d, out_path):
          "new venue. The Experience page already links to your LinkedIn "
          "recommendations. This is the strongest option and costs you only a "
          "polite request."),
-        ("Anonymised quote with role and context",
+        ("Anonymized quote with role and context",
          "“Product Manager, US investment platform” carries most of "
          "the credibility of a named quote with none of the personal "
          "information. Still ask permission for the quote itself. Set name and "
-         "company to null and consent to “anonymised”."),
+         "company to null and consent to “anonymized”."),
         ("Named quote with written permission",
          "Strongest on the page, but only after the person has confirmed in "
          "writing that they are happy to be named publicly. Set consent to "
@@ -751,7 +751,7 @@ def build_portfolio_doc(d, out_path):
          "Add an object to the testimonialsData array in src/app/data.js. The "
          "section renders automatically once the array is non-empty, and stays "
          "hidden while it is empty. Fields: quote, name, role, company, "
-         "context, project, consent (“named” or “anonymised”).",
+         "context, project, consent (“named” or “anonymized”).",
          size=9.5, indent=0.18, space_after=3)
 
     # ---------------- 18. languages ----------------

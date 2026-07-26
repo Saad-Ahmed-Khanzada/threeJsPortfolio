@@ -17,7 +17,7 @@ import {
 export const metadata = {
   title: "Contact",
   description:
-    "Get in touch with Saad Ahmed Khanzada — Senior Software Engineer open to remote senior and technical lead roles worldwide.",
+    "Get in touch with Saad Ahmed Khanzada, a Senior Software Engineer open to remote senior and technical lead roles worldwide.",
 };
 
 const goodFits = [
@@ -51,7 +51,7 @@ export default function Contact() {
             I&apos;m open to remote senior and technical lead roles worldwide, and
             to contract work on web and mobile products. If you&apos;re hiring or
             scoping a build, send me the details and I&apos;ll come back to you
-            with an honest read on fit — including if I&apos;m not the right
+            with an honest read on fit, including if I&apos;m not the right
             person for it.
           </p>
 

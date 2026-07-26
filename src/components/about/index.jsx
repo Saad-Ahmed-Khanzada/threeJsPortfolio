@@ -128,7 +128,7 @@ const AboutDetails = () => {
         <SectionHeading
           eyebrow="Core competencies"
           title="What I bring to a team"
-          intro="Grouped by the four kinds of work I actually do day to day, rather than as one undifferentiated keyword list."
+          intro="Grouped by the four kinds of work I actually do day to day, instead of one long keyword list."
         />
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
