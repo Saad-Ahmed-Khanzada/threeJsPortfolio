@@ -21,12 +21,12 @@ export const personalData = {
   secondaryTitles: ["Product Engineer", "Technical Lead"],
   tagline: "I build web and mobile products, and I lead the teams that ship them.",
   heroIntro:
-    "Senior software engineer with 4+ years of experience. I take web and mobile products from the first client conversation through to the app store.",
+    "Senior software engineer with 5+ years of experience. I take web and mobile products from the first client conversation through to the app store.",
   location: "Karachi, Pakistan",
   availability: "Open to remote roles worldwide",
   email: "saadkhanzada1@gmail.com",
   phone: "+92 324 2400532",
-  yearsExperience: "4+",
+  yearsExperience: "5+",
   projectsDelivered: "20+",
   teamLed: "12",
   resumeUrl: "/Saad_Ahmed_Khanzada_Resume.pdf",
@@ -42,14 +42,14 @@ export const personalData = {
 /* ------------------------------------------------------------------ */
 
 export const professionalSummary =
-  "Senior software engineer with 4+ years of professional experience building web and mobile products for clients in the US, UK, UAE and Pakistan. My work covers the whole delivery cycle. I run requirement sessions with clients, turn what they need into technical plans, write the production React, React Native, Next.js and SvelteKit code, coordinate backend, QA and design, and handle releases through App Store Connect and Google Play. I currently lead a 12-person cross-functional team. I also use AI-assisted analysis to get productive in unfamiliar codebases quickly, which is how I shipped production fixes in Flutter and C++ without having worked in either before.";
+  "Senior software engineer with 5+ years of professional experience building web and mobile products for clients in the US, UK, UAE and Pakistan. My work covers the whole delivery cycle. I run requirement sessions with clients, turn what they need into technical plans, write the production React, React Native, Next.js and SvelteKit code, coordinate backend, QA and design, and handle releases through App Store Connect and Google Play. I currently lead a 12-person cross-functional team. I also use AI-assisted analysis to get productive in codebases and stacks outside my usual day-to-day fast, which is how I shipped production fixes in Flutter and C++ with no prior experience in either.";
 
 export const aboutParagraphs = [
   "I started out as a frontend developer. The title stopped describing the job a while ago. In a normal week I'll be on a call with a client working out what they actually need, turning that into tickets for the team, reviewing pull requests, writing production React Native or Next.js code, tracking down why staging is pointing at the wrong backend, and then showing the finished thing to the client.",
   "That range is on purpose. On most projects the thing slowing delivery isn't the technology. It's whether anyone is holding the whole picture: did we understand what was asked for, does the backend contract match what the app expects, will this build pass review. I try to be the person holding that.",
   "The stack I work in most is React, React Native, Next.js and SvelteKit, with TypeScript, Redux Toolkit and Tailwind, against REST APIs, Firebase and AWS. I handle the release side myself. Firebase setup, native iOS and Android configuration, App Store Connect and Play Console submissions, and separate dev, staging and production environments pointed at the right backends. Secrets go in Secrets Manager, not the repo.",
   "I currently lead a team of twelve: frontend and backend developers, QA engineers, designers and business analysts. I picked that up in the middle of a live project when our Project Manager left. Planning, assigning work, reviewing what goes out, tracking risk and talking to the client are all mine now, and I still write code.",
-  "The last piece is how fast I can pick up something new. I use AI heavily for this. Claude, ChatGPT, Codex, and agents I've built around my own workflow. It's how I fixed production bugs in a Flutter meditation app and a C++ mobile codebase without having shipped either language before. I also build workflow automations in n8n. To be clear about what I'm claiming: I'm not a Flutter or C++ specialist. I can be useful in a stack I don't know inside a week.",
+  "The last piece is how fast I can pick up something new. I use AI heavily for this. Claude, ChatGPT, Codex, and agents I've built around my own workflow. Whatever the stack, this is how I get oriented fast. Two of the clearer examples are a Flutter meditation app and a C++ mobile codebase, both fixed in production without having shipped either language before. I also build workflow automations in n8n. To be clear about what I'm claiming: I'm not a Flutter or C++ specialist, and this isn't limited to those two. I can be useful in a stack I don't know inside a week.",
 ];
 
 /* ------------------------------------------------------------------ */
@@ -1549,7 +1549,7 @@ export const techStackData = [
     name: "JavaScript",
     category: "Languages",
     description: "Core language throughout my professional work",
-    experience: "4+ years",
+    experience: "5+ years",
     level: "Expert",
     icon: "javascript",
     color: "#F7DF1E",
@@ -1702,7 +1702,7 @@ export const techStackData = [
     name: "Git",
     category: "Release & DevOps",
     description: "Branching strategy, review workflow, and release hygiene",
-    experience: "4+ years",
+    experience: "5+ years",
     level: "Expert",
     icon: "git",
     color: "#F05032",

@@ -21,9 +21,7 @@ directly means your next build overwrites the change.
 
 ## Facts to keep consistent everywhere
 
-- **4+ years professional experience.** Matches the documented timeline from
-  Dec 2022. Do not inflate it without adding earlier roles to the experience
-  section.
+- **5+ years professional experience.**
 - **Positioning:** Senior Software Engineer. Also targets Technical Lead and
   Product Engineer.
 - **Leads a 12-person cross-functional team**, taken over mid-project when the

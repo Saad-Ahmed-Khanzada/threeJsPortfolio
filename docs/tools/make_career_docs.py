@@ -43,7 +43,7 @@ COVER_LETTER_LONG = [
     "THIS COMPANY. See the notes at the end. This is the only line that has "
     "to change every time, and the only line that decides whether the rest "
     "gets read.]",
-    "I’m a senior software engineer with 4+ years building web and mobile "
+    "I’m a senior software engineer with 5+ years building web and mobile "
     "products for clients in the United States, United Kingdom, United Arab "
     "Emirates, and Pakistan. My title has usually said “developer”, but the "
     "work has consistently been wider than that: I run requirement sessions "
@@ -79,7 +79,7 @@ COVER_LETTER_LONG = [
 COVER_LETTER_SHORT = [
     "Hi [Name],",
     "I’m applying for [Role] at [Company]. [One sentence on why this company.]",
-    "I’m a senior software engineer with 4+ years building web and mobile "
+    "I’m a senior software engineer with 5+ years building web and mobile "
     "products for clients in the US, UK, UAE and Pakistan, in React, React "
     "Native, Next.js and TypeScript. Beyond the code, I run client requirement "
     "sessions and own delivery end to end, including App Store and Play "

@@ -68,7 +68,7 @@ pages = len(reader.pages)
 required = [
     "Senior Software Engineer", "12-person", "InvestWizz", "Flutter", "C++",
     "Redux Toolkit", "App Store Connect", "n8n", "saadkhanzada1@gmail.com",
-    "React Native", "SvelteKit", "4+ years",
+    "React Native", "SvelteKit", "5+ years",
 ]
 missing = [k for k in required if k not in text]
 

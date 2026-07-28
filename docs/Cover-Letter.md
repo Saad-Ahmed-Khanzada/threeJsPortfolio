@@ -11,7 +11,7 @@ Dear [Hiring Manager’s name],
 
 I’m applying for the [Role] position at [Company]. [ONE SENTENCE ON WHY THIS COMPANY. See the notes at the end. This is the only line that has to change every time, and the only line that decides whether the rest gets read.]
 
-I’m a senior software engineer with 4+ years building web and mobile products for clients in the United States, United Kingdom, United Arab Emirates, and Pakistan. My title has usually said “developer”, but the work has consistently been wider than that: I run requirement sessions with clients directly, break what they need into technical plans, write the production React Native and Next.js code, and own the release through App Store Connect and Google Play.
+I’m a senior software engineer with 5+ years building web and mobile products for clients in the United States, United Kingdom, United Arab Emirates, and Pakistan. My title has usually said “developer”, but the work has consistently been wider than that: I run requirement sessions with clients directly, break what they need into technical plans, write the production React Native and Next.js code, and own the release through App Store Connect and Google Play.
 
 The clearest example is my current project. Our Project Manager left partway through an active engagement. I did not wait for a replacement. I took over delivery: planning, task assignment, reviewing everything before it reached the client, tracking risk, and running the client relationship. I now lead twelve people across frontend, backend, QA, design and business analysis, and the schedule never paused for the handover.
 
@@ -37,7 +37,7 @@ Hi [Name],
 
 I’m applying for [Role] at [Company]. [One sentence on why this company.]
 
-I’m a senior software engineer with 4+ years building web and mobile products for clients in the US, UK, UAE and Pakistan, in React, React Native, Next.js and TypeScript. Beyond the code, I run client requirement sessions and own delivery end to end, including App Store and Play Console releases.
+I’m a senior software engineer with 5+ years building web and mobile products for clients in the US, UK, UAE and Pakistan, in React, React Native, Next.js and TypeScript. Beyond the code, I run client requirement sessions and own delivery end to end, including App Store and Play Console releases.
 
 Right now I lead a twelve-person cross-functional team. I took that over mid-project when our Project Manager left, without pausing the schedule.
 
